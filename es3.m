@@ -10,17 +10,21 @@ plot(t, y)
 grid on
 
 function d = rect(t)
+
     if abs(t) <= 0.5
         d = 1;
     else
         d = 0;
     end
+
 end
 
 function g = rep(t, T, a, n)
     sum = 0;
+
     for i = -n:n
         sum = sum + rect(a * (t - i * T));
     end
+
     g = sum;
 end
