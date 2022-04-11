@@ -17,8 +17,10 @@ function p = dotProd(A, B)
     l = size(A);
     l = l(2);
     v = zeros(1, l);
+
     for i = 1:l
-        v(i) = A(:, i)'*B(:, i);
+        v(i) = A(:, i)' * B(:, i);
     end
+
     p = v;
 end
