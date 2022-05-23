@@ -13,6 +13,7 @@ L = sqrt(l^2 - 4 * k * m);
 
 Tc = 0.01;
 t = 0:Tc:5;
+Nt = length(t);
 
 % Signals
 x = 3 * sin(13 * t);
@@ -22,22 +23,20 @@ plot(t, x)
 figure(2)
 plot(t, abs(h))
 
-fc = 1 /Tc;
+X = fft(x);
+H = fft(h);
+Y = H .* X;
+y = ifft(Y);
 
-Nx = length(x);
-fsx = fc / Nx;
-X = fftshift(fft(x));
-fx = fsx * (-Nx/2:Nx/2 - 1);
-
-Nh = length(h);
-fsh = fc / Nh;
-H = fftshift(fft(h));
-fh = fsh * (-Nh/2:Nh/2 - 1);
-
-Y = X .* H;
-y = ifft(ifftshift(Y));
 yconv = conv(x, h);
+yconv = t .* yconv(1:Nt);
+
+ysim = 390 * ((117 * sin(13 * t) - 119 * cos(13 * t)) / 27850 ...
+    + exp(-9 * t / 2) .* (119 * sqrt(119) * cos(sqrt(119) * t / 2) ... 
+    - 1971 * sin(sqrt(119) * t / 2)) / (27850 * sqrt(119)));
 
 figure(3)
-plot(t, y)
-plot(yconv)
+hold on
+plot(t, real(y))
+plot(t, real(yconv))
+plot(t, ysim)

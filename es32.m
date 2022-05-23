@@ -26,11 +26,10 @@ t2 = k2 * Tc2;
 s1 = A1 * A2 * cos(2 * pi * f1 * k1 * Tc1) .* cos(2 * pi * f2 * k1 * Tc1) .* rect(k1 * Tc1/Trect1);
 s2 = A1 * A2 * cos(2 * pi * f1 * k2 * Tc2) .* cos(2 * pi * f2 * k2 * Tc2) .* rect(k2 * Tc2/Trect2);
 
-figure(1)
-plot(t1, s1)
-
-figure(2)
-plot(t2, s2)
+subplot(4, 2, 1)
+plot(t1, s1, '-r')
+subplot(4, 2, 2)
+plot(t2, s2, '-b')
 
 % Fourier Transform
 fc1 = 1 / Tc1;
@@ -47,21 +46,23 @@ f2 = fs2 * (0:N2 - 1);
 S2 = fftshift(Tc2 * fft(s2, N2) .* exp(-1j * 2 * pi * f2 * k2(1) * Tc2));
 f2 = fs2 * (-N2/2:N2/2 - 1);
 
-figure(3)
-plot(f1, abs(S1));
-
-figure(4)
-plot(f2, abs(S2));
+subplot(4, 2, 3)
+plot(f1, abs(S1), '-r')
+subplot(4, 2, 4)
+plot(f2, abs(S2), '-b')
+subplot(4, 2, 5)
+plot(f1, angle(S1), '.r')
+subplot(4, 2, 6)
+plot(f2, angle(S2), '.b')
 
 % Fourier Antitransforms
 s1ifft = ifft(ifftshift(S1) .* exp(1j * 2 * pi * f1 * k1(1) * Tc1)) / Tc1;
 s2ifft = ifft(ifftshift(S2) .* exp(1j * 2 * pi * f2 * k2(1) * Tc2)) / Tc2;
 
-figure(5)
-plot(t1, abs(s1ifft))
-
-figure(6)
-plot(t2, abs(s2ifft))
+subplot(4, 2, 7)
+plot(t1, real(s1ifft), '-r')
+subplot(4, 2, 8)
+plot(t2, real(s2ifft), '-b')
 
 %% Utilities
 

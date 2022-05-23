@@ -34,21 +34,23 @@ for i = 1:100
 end
 
 figure(2)
+subplot(2, 1, 1)
 hold on
 plot(f, abs(X), '.r')
-plot(f, abs(Xsym), '-b')
-plot(f, abs(Xsym_r), ':g')
+plot(f, abs(Xsym_r), '-b')
+subplot(2, 1, 2)
+hold on
+plot(f, angle(X), '.r')
+plot(f, angle(Xsym_r), '-b')
 
 % Fourier Antitransforms
 xifft = ifft(ifftshift(X) .* exp(1j * 2 * pi * f * t(1))) * fc;
-xifftsym = ifft(ifftshift(Xsym) .* exp(1j * 2 * pi * f * t(1))) * fc;
 xifftsym_r = ifft(ifftshift(Xsym_r) .* exp(1j * 2 * pi * f * t(1))) * fc;
 
 figure(3)
 hold on
 plot(t, real(xifft), '.r')
-plot(t, real(xifftsym), '-b')
-plot(t, abs(xifftsym_r), 'vk')
+plot(t, real(xifftsym_r), '-b')
 
 
 %% Utility functions
