@@ -32,12 +32,17 @@ player = audioplayer(xdm, F);
 %% Filtering the given signal
 F_filter1 = 31700; % By inspection of the FT of x_t
 F_filter2 = 34750; % By inspection of the FT of x_t
+F_filter3 = 39825; % By inspection of the FT of x_t
+F_filter4 = 40175; % By inspection of the FT of x_t
 
 Hnf1 = NF_design(Tc, F_filter1);
 Hnf2 = NF_design(Tc, F_filter2);
+Hnf3 = NF_design(Tc, F_filter3);
+Hnf4 = NF_design(Tc, F_filter4);
 xfilt = filter(Hnf1, x_t);
 xfilt = filter(Hnf2, xfilt);
-
+xfilt = filter(Hnf3, xfilt);
+xfilt = filter(Hnf4, xfilt);
 
 %% Demodulating the filtered signal
 Fm = 40000;
