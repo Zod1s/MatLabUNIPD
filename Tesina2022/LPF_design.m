@@ -20,7 +20,7 @@ function HLP = LPF_design(T,Fst)
 
 
 
-    SPEC = 'Fp, Fst, Ap, Ast';
+    SPEC = 'Fp,Fst,Ap,Ast';
     LP = fdesign.lowpass(SPEC, Fp, Fst, Ap, Ast, 1 / T);
 
     HLP = design(LP, 'equiripple')
