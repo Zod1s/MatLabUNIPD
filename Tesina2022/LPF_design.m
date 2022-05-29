@@ -25,8 +25,8 @@ function HLP = LPF_design(T,Fst)
 
     HLP = design(LP, 'equiripple')
 
-    % plot frequency response, the red line is the ideal low pass filter with
-    % tolerances and transiotion band depicted.
+    % plot frequency response, the red line is the ideal low pass filter
+    % with tolerances and transiotion band depicted.
     % the blue line is the realized frequency response
 
     fvtool(HLP)

@@ -20,8 +20,8 @@ function HNF = NF_design(T, F_filter)
 
     HNF = design(NF)
 
-    % plot frequency response, the red line is the ideal low pass filter with
-    % tolerances and transiotion band depicted.
+    % plot frequency response, the red line is the ideal low pass filter
+    % with tolerances and transiotion band depicted.
     % the blue line is the realized frequency response
 
     fvtool(HNF)
