@@ -27,13 +27,21 @@ ylabel("|X_{t}(f)|")
 %% Demodulation
 Fm = 40000;
 
-xdm = x_t ./ cos(2 * pi * Fm * t);
+[xdm, Xdm] = demodulation(x_t, T, Fm, t, f);
+% figure(1)
+% subplot(211)
+% plot(t, xdm)
+% xlabel("time (s)")
+% ylabel("x_{dm}(t)")
+% subplot(212)
+% plot(f, abs(Xdm))
+% xlabel("frequency (Hz)")
+% ylabel("|X_{dm}(f)|")
 player = audioplayer(xdm, F);
 play(player);
 
-% Ricontrolla come fare la demodulazione
 % Gli artefatti sonori sono causati dai picchi presenti nella
-% trasformata di Fourier del segnale x_t, che introducono
+% trasformata di Fourier del segnale, che introducono
 % frequenze non presenti nel segnale originale.
 
 %% Filtering the given signal
@@ -45,16 +53,23 @@ Hnf2 = NF_design(T, F_filter2);
 xfilt = filter(Hnf1, x_t);
 xfilt = filter(Hnf2, xfilt);
 
-% Xfilt = fftshift(T * fft(xfilt));
-% figure(2)
-% plot(f, abs(Xfilt))
-% xlabel("frequency (Hz)")
-% ylabel("|X_{filt}|")
-
 %% Demodulating the filtered signal
 Fm = 40000;
 
-xfiltdm = xfilt ./ cos(2 * pi * Fm * t);
+[xfiltdm, Xfiltdm] = demodulation(xfilt, T, Fm, t, f);
+% figure(1)
+% subplot(311)
+% plot(t, xfiltdm)
+% xlabel("time (s)")
+% ylabel("x_{filtdm}(t)")
+% subplot(312)
+% plot(f, abs(Xfiltdm))
+% xlabel("frequency (Hz)")
+% ylabel("|X_{filtdm}(f)|")
+% subplot(313)
+% plot(f, abs(Xdm - Xfiltdm))
+% xlabel("frequency (Hz)")
+% ylabel("|X_{dm} - X_{filtdm}(f)|")
 player = audioplayer(xfiltdm, F);
 play(player);
 
@@ -62,9 +77,9 @@ play(player);
 Fc = 29400;
 
 tc = 1:6:length(t);
-xc = xdm(tc);
-player = audioplayer(xc, Fc);
-play(player);
+x_c = xdm(tc);
+player = audioplayer(x_c, Fc);
+play(player)
 
 % Gli artefatti sono probabilmente dovuti al fenomeno di aliasing
 % in quanto la frequenza di campionamento Fc non è maggiore del doppio
@@ -77,17 +92,25 @@ play(player);
 
 %% Refiltering the signal with a low-pass filter
 % Uso una frequenza di taglio di Fst = 14600 in modo che Fc > 2 * Fst
-Fc = 29400;
-
 Fst = 14600;
-Hlp = LPF_design(1 / Fc, Fst);
-xfilt = filter(Hlp, xfilt);
 
-%% Demodulating the low-pass-filtered signal
-Fm = 40000;
-xdm = xfilt ./ cos(2 * pi * Fm * t);
+Hlp = LPF_design(1 / Fc, Fst);
+xdmfilt = filter(Hlp, xdm);
 
 %% Resampling the low-pass-filtered signal
 tc = 1:6:length(t);
-xc = xdm(tc);
-player = audioplayer(xc, Fc);
+x_c = xdm(tc);
+player = audioplayer(x_c, Fc);
+play(player)
+
+%% Utilities
+function rect = rect(t, T) 
+    rect = 1 * double(abs(t) <= 0.5 * T) + 0.5 * double(abs(t) == 0.5 * T);
+end
+
+function [dm, Xdm] = demodulation(x, T, Fm, t, f)
+    xdm = 2 * x .* cos(2 * pi * Fm * t);
+    Xdm = fftshift(T * fft(xdm));
+    Xdm = Xdm .* rect(f, Fm);
+    dm = ifft(ifftshift(Xdm)) / T;
+end
