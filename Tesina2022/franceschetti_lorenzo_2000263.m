@@ -99,9 +99,27 @@ xdmfilt = filter(Hlp, xdm);
 
 %% Resampling the low-pass-filtered signal
 tc = 1:6:length(t);
-x_c = xdm(tc);
-player = audioplayer(x_c, Fc);
+x_c_hat = xdm(tc);
+player = audioplayer(x_c_hat, Fc);
 play(player)
+
+%% Fourier transforms of sampled signals
+% ricontrollare
+N = length(x_c);
+X_c = fftshift(fft(x_c) / Fc);
+X_c_hat = fftshift(fft(x_c_hat) / Fc);
+f_c = Fc / N;
+f = f_c * (-N/2:N/2 - 1);
+
+subplot(211)
+plot(f, abs(X_c))
+xlabel("frequency (Hz)")
+ylabel("|X_{c}(f)|")
+
+subplot(212)
+plot(f, abs(X_c_hat))
+xlabel("frequency (Hz)")
+ylabel("|\^{X}_{c}(f)|")
 
 %% Utilities
 function rect = rect(t, T) 
@@ -111,6 +129,6 @@ end
 function [dm, Xdm] = demodulation(x, T, Fm, t, f)
     xdm = 2 * x .* cos(2 * pi * Fm * t);
     Xdm = fftshift(T * fft(xdm));
-    Xdm = Xdm .* rect(f, Fm);
+    Xdm = Xdm .* rect(f, Fm); % ricontrollare come fare la convoluzione
     dm = ifft(ifftshift(Xdm)) / T;
 end
