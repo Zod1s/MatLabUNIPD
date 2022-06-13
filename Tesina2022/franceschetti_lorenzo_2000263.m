@@ -1,19 +1,16 @@
-%% Inizializzazione
+%% Inizializzazione dell'ambiente
 clearvars
 close all
 clc
 
-load audio.mat
+load audio.mat % Carica il vettore x_t e F
 
 %{
-N_t: lunghezza del vettore x_t
-T: periodo di campionamento
-t_t: istanti di tempo in cui è campionato il segnale x_t
-B: banda monolatera del segnale x, 
-   massima frequenza udibile dall'orecchio umano
-graphs: flag per mostrare i grafici
-        - 0 per riprodurre le tracce audio
-        - 1 per mostrare i grafici relativi
+    N_t: lunghezza del vettore x_t
+    T: periodo di campionamento [s]
+    t_t: istanti di tempo in cui è campionato il segnale x_t [s]
+    B: larghezza della banda monolatera del segnale x [Hz]
+       massima frequenza udibile dall'orecchio umano
 %}
 
 N_t = length(x_t);
@@ -21,12 +18,10 @@ T = 1 / F;
 t_t = T * (0:N_t - 1);
 B = 20000;
 
-graphs = 0;
-
-%% Grafici del segnale dato e della sua trasformata di Fourier
+%% Q1) Grafici del segnale dato e della sua trasformata di Fourier
 %{
-X_t: trasformata di Fourier del segnale x_t
-f_t: vettore di frequenze nel periodo [-1/(2 * T), 1/(2 * T))
+    X_t: trasformata di Fourier del segnale x_t
+    f_t: vettore di frequenze nell'intervallo [-1/(2 * T), 1/(2 * T)) [Hz]
 %}
 
 X_t = fftshift(T * fft(x_t));
@@ -34,57 +29,55 @@ f_t = F / N_t * (-N_t/2:N_t/2 - 1);
 
 figure(1)
 plot(t_t, x_t)
-xlabel("time (s)")
-ylabel("x_{t}(t)")
+title("Grafico di $x_{t}(t)$",'Interpreter','Latex')
+xlabel("time (s)",'Interpreter','Latex')
+ylabel("$x_{t}(t)$",'Interpreter','Latex')
 grid on
 grid minor
 
 figure(2)
 plot(f_t, abs(X_t))
-xlabel("frequency (Hz)")
-ylabel("|X_{t}(f)|")
+title("Grafico di $|X_{t}(f)|$",'Interpreter','Latex')
+xlabel("frequency (Hz)",'Interpreter','Latex')
+ylabel("$|X_{t}(f)|$",'Interpreter','Latex')
 grid on
 grid minor
 
-%% Demodulazione del segnale modulato
+%% Q2) Demodulazione del segnale e ascolto
 %{
-Fm: frequenza di modulazione
-x: segnale x_t demodulato
-X: trasformata del segnale x
+    Fm: frequenza di modulazione [Hz]
+        ricavata al passo precedente
+    x: segnale x_t demodulato
+    X: trasformata di Fourier del segnale x
 %}
 
 Fm = 40000;
 
 [x, X] = demodulation(x_t, T, Fm, B, t_t, f_t);
 
-if graphs
-    figure(3)
-    subplot(211)
-    plot(t_t, x)
-    xlabel("time (s)")
-    ylabel("x(t)")
-    grid on
-    grid minor
-    subplot(212)
-    plot(f_t, abs(X))
-    xlabel("frequency (Hz)")
-    ylabel("|X(f)|")
-    grid on
-    grid minor
-else
-    player1 = audioplayer(x, F);
-    play(player1);
-end
+% figure(3)
+% plot(t_t, x)
+% title("Grafico di $x(t)$",'Interpreter','Latex')
+% xlabel("time (s)",'Interpreter','Latex')
+% ylabel("$x(t)$",'Interpreter','Latex')
+% grid on
+% grid minor
+% figure(4)
+% plot(f_t, abs(X))
+% title("Grafico di $|X(f)|$",'Interpreter','Latex')
+% xlabel("frequency (Hz)",'Interpreter','Latex')
+% ylabel("$|X(f)|$",'Interpreter','Latex')
+% grid on
+% grid minor
 
-% Gli artefatti sonori sono causati dai picchi presenti nella
-% trasformata di Fourier del segnale, che introducono
-% frequenze non presenti nel segnale originale.
+player1 = audioplayer(x, F);
+play(player1);
 
-%% Filtraggio del segnale modulato
+%% Q4) Filtraggio del segnale modulato
 %{
-F_filter1, F_filter2: frequenze dei due picchi da eliminare
-Hnf1, Hnf2: notch filter
-x_t_nffilt: segnale x_t filtrato con i due notch filter
+    F_filter1, F_filter2: frequenze dei due picchi da eliminare [Hz]
+    Hnf1, Hnf2: notch filter
+    x_t_nffilt: segnale x_t filtrato con i due notch filter
 %}
 
 F_filter1 = 31700;
@@ -92,82 +85,86 @@ F_filter2 = 34750;
 
 Hnf1 = NF_design(T, F_filter1);
 Hnf2 = NF_design(T, F_filter2);
+
 x_t_nffilt = filter(Hnf1, x_t);
 x_t_nffilt = filter(Hnf2, x_t_nffilt);
 
-%% Demodulazione del segnale filtrato
+%% Q5) Demodulazione del segnale filtrato e ascolto
 %{
-x_nffilt: segnale x_t_nffilt demodulato
-X_nffilt: trasformata di Fourier di x_nffilt
+    Fm: frequenza di modulazione [Hz] (vedi passo Q2)
+    x_nffilt: segnale x_t_nffilt demodulato
+    X_nffilt: trasformata di Fourier di x_nffilt
 %}
 
 [x_nffilt, X_nffilt] = demodulation(x_t_nffilt, T, Fm, B, t_t, f_t);
 
-if graphs
-    figure(4)
-    subplot(211)
-    plot(t_t, x_nffilt)
-    xlabel("time (s)")
-    ylabel("x_{filtdm}(t)")
-    grid on
-    grid minor
-    subplot(212)
-    plot(f_t, abs(X_nffilt))
-    xlabel("frequency (Hz)")
-    ylabel("|X_{filtdm}(f)|")
-    grid on
-    grid minor
-else
-    player2 = audioplayer(x_nffilt, F);
-    play(player2);
-end
+% figure(5)
+% plot(t_t, x_nffilt)
+% title("Grafico di $x_{nffilt}(t)$",'Interpreter','Latex')
+% xlabel("time (s)",'Interpreter','Latex')
+% ylabel("$x_{nffilt}(t)$",'Interpreter','Latex')
+% grid on
+% grid minor
+% figure(6)
+% title("Grafico di $|X_{nffilt}(f)|$",'Interpreter','Latex')
+% plot(f_t, abs(X_nffilt))
+% xlabel("frequency (Hz)",'Interpreter','Latex')
+% ylabel("$|X_{nffilt}(f)|$",'Interpreter','Latex')
+% grid on
+% grid minor
 
-%% Campionamento del segnale demodulato
+player2 = audioplayer(x_nffilt, F);
+play(player2);
+
+%% Q6) Campionamento del segnale demodulato e ascolto
 %{
-Fc: frequenza alla quale campionare x_t
-xc: segnale x_nffilt campionato alla frequenza Fc
+    x: segnale demodulato (vedi passo Q2)
+    Fc: frequenza alla quale campionare x [Hz]
+    xc: segnale x campionato alla frequenza Fc
 %}
 
 Fc = 29400;
 
-xc = x_nffilt(1:6:length(t_t));
+% essendo Fc = F / 6, il campionamento equivale a prendere
+% un campione ogni 6
+xc = x(1:6:length(t_t));
 
-if ~graphs
-    player3 = audioplayer(xc, Fc);
-    play(player3)
-end
+player3 = audioplayer(xc, Fc);
+play(player3)
 
-%% Filtraggio del segnale x_nffilt
+%% Q7) Filtraggio del segnale x_nffilt
 %{
-Fst: frequenza di taglio per il filtro passa-basso
-Hlp: filtro passa-basso alla frequenza Fst
-x_nffilt_lpfilt: segnale x_nffilt filtrato con il filtro passa-basso
+    Fst: frequenza di taglio per il filtro passa-basso [Hz]
+    Hlp: filtro passa-basso alla frequenza Fst
+    x_nffilt: segnale x_t filtrato con i due notch filter 
+              e demodulato (vedi passo Q5) 
+    x_nffilt_lpfilt: segnale x_nffilt filtrato con il filtro passa-basso
 %}
 
-Fst = 14600;
+Fst = 14650;
 
 Hlp = LPF_design(T, Fst);
 x_nffilt_lpfilt = filter(Hlp, x_nffilt);
 
-%% Campionamento del nuovo segnale filtrato
+%% Q7) Campionamento del nuovo segnale filtrato
 %{
-xc_hat: segnale x_nffilt_lpfilt campionato alla frequenza Fc 
+    xc_hat: segnale x_nffilt_lpfilt campionato alla frequenza Fc 
 %}
 
+% essendo Fc = F / 6, il campionamento equivale a prendere
+% un campione ogni 6
 xc_hat = x_nffilt_lpfilt(1:6:length(t_t));
 
-if ~graphs
-    player4 = audioplayer(xc_hat, Fc);
-    play(player4)
-end
+player4 = audioplayer(xc_hat, Fc);
+play(player4)
 
-%% Confronto tra trasformate di Fourier di xc e xc_hat
+%% Q8) Confronto tra trasformate di Fourier di xc e xc_hat
 %{
-Tc: periodo di campionamento dei due segnali
-Nc: lunghezza del vettore xc
-fc: vettore di frequenze nel periodo [-1/(2 * Tc), 1/(2 * Tc))
-Xc: trasformata di Fourier di xc
-Xc_hat: trasformata di Fourier di xc_hat
+    Tc: periodo di campionamento dei due segnali [s]
+    Nc: lunghezza del vettore xc
+    fc: vettore di frequenze nell'intervallo [-1/(2 * Tc), 1/(2 * Tc)) [Hz]
+    Xc: trasformata di Fourier di xc
+    Xc_hat: trasformata di Fourier di xc_hat
 %}
 
 Tc = 1 / Fc;
@@ -177,25 +174,41 @@ Xc = fftshift(Tc * fft(xc));
 Xc_hat = fftshift(Tc * fft(xc_hat));
 fc = Fc / Nc * (-Nc/2:Nc/2 - 1);
 
-figure(5)
-plot(fc, log10(abs(Xc)))
-xlabel("frequency (Hz)")
-ylabel("|X_{c}(f)|")
+figure(7)
+plot(fc, abs(Xc))
+title("Grafico di $|X_{c}(f)|$",'Interpreter','Latex')
+xlabel("frequency (Hz)",'Interpreter','Latex')
+ylabel("$|X_{c}(f)|$",'Interpreter','Latex')
 grid on
 grid minor
 
-figure(6)
-plot(fc, log(abs(Xc_hat)))
-xlabel("frequency (Hz)")
-ylabel("|X^\^_{c}(f)|")
+figure(8)
+plot(fc, abs(Xc_hat))
+title("Grafico di $|\hat{X}_{c}(f)|$",'Interpreter','Latex')
+xlabel("frequency (Hz)",'Interpreter','Latex')
+ylabel("$|\hat{X}_{c}(f)|$",'Interpreter','Latex')
 grid on
 grid minor
 
-%% Utilities
-function rect = rect(t, T) 
-    rect = 1 * double(abs(t) < 0.5 * T) + 0.5 * double(abs(t) == 0.5 * T);
+%% Funzioni utili
+% funzione finestra rettangolare
+% t: vettore di istanti temporali
+% T: numero reale non nullo
+% y: rect(t/T)
+% nei punti di discontinuità vale 0.5
+function y = rect(t, T) 
+    y = 1 * double(abs(t) < 0.5 * T) + 0.5 * double(abs(t) == 0.5 * T);
 end
 
+% funzione demodulatrice
+% x: segnale da demodulare
+% T: periodo di campionamento, inverso della frequenza di campionamento
+% Fm: frequenza di modulazione
+% B: larghezza di banda monolatera
+% t: vettore di istanti temporali
+% f: vettore di frequenze
+% xdm: segnale x demodulato
+% Xdm: trasformata di Fourier del segnale xdm
 function [xdm, Xdm] = demodulation(x, T, Fm, B, t, f)
     xdm = 2 * x .* cos(2 * pi * Fm * t);
     Xdm = fftshift(T * fft(xdm)) .* rect(f, 2 * B);

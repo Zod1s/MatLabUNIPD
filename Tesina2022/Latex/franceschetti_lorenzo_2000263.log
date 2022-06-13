@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2020.5.24)  13 JUN 2022 01:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2020.5.24)  14 JUN 2022 00:32
 entering extended mode
 **./franceschetti_lorenzo_2000263.tex
 (franceschetti_lorenzo_2000263.tex
@@ -79,11 +79,19 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen143
 \Gin@req@width=\dimen144
 )
+("C:\Users\Lorenzo\AppData\Local\Programs\MiKTeX 2.9\tex/latex/float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count178
+\float@exts=\toks17
+\float@box=\box45
+\@float@everytoks=\toks18
+\@floatcapt=\box46
+)
 ("C:\Users\Lorenzo\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3back
 end-pdfmode.def"
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count178
-\l__pdf_internal_box=\box45
+\l__kernel_color_stack_int=\count179
+\l__pdf_internal_box=\box47
 ) (franceschetti_lorenzo_2000263.aux)
 \openout1 = `franceschetti_lorenzo_2000263.aux'.
 
@@ -110,15 +118,15 @@ LaTeX Font Info:    ... okay on input line 10.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(36.135pt, 542.02501pt, 36.135pt)
-* v-part:(T,H,B)=(36.135pt, 722.7pt, 36.135pt)
+* h-part:(L,W,R)=(56.9055pt, 500.484pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 681.15898pt, 56.9055pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=542.02501pt
-* \textheight=722.7pt
-* \oddsidemargin=-36.135pt
-* \evensidemargin=-36.135pt
-* \topmargin=-73.135pt
+* \textwidth=500.484pt
+* \textheight=681.15898pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-52.36449pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -140,17 +148,17 @@ LaTeX Font Info:    ... okay on input line 10.
 ("C:\Users\Lorenzo\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp
 -pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count179
+\scratchcounter=\count180
 \scratchdimen=\dimen145
-\scratchbox=\box46
-\nofMPsegments=\count180
-\nofMParguments=\count181
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count182
+\scratchbox=\box48
+\nofMPsegments=\count181
+\nofMParguments=\count182
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count183
 \MPscratchDim=\dimen146
-\MPnumerator=\count183
-\makeMPintoPDFobject=\count184
-\everyMPtoPDFconversion=\toks18
+\MPnumerator=\count184
+\makeMPintoPDFobject=\count185
+\everyMPtoPDFconversion=\toks20
 )
 ("C:\Users\Lorenzo\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\eps
 topdf-base.sty"
@@ -163,43 +171,72 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 14.
+(Font)              <12> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 14.
+(Font)              <8> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 14.
-<./images/X_t.png, id=1, 447.92343pt x 351.56343pt>
-File: ./images/X_t.png Graphic file (type png)
-<use ./images/X_t.png>
-Package pdftex.def Info: ./images/X_t.png  used on input line 31.
-(pdftex.def)             Requested size: 325.2183pt x 255.2605pt.
- [1
+(Font)              <6> on input line 16.
+<./images/x_t.png, id=1, 467.49657pt x 363.60844pt>
+File: ./images/x_t.png Graphic file (type png)
+<use ./images/x_t.png>
+Package pdftex.def Info: ./images/x_t.png  used on input line 40.
+(pdftex.def)             Requested size: 250.24199pt x 194.63678pt.
+<./images/fft_x_t.png, id=3, 447.92343pt x 351.56343pt>
+File: ./images/fft_x_t.png Graphic file (type png)
+<use ./images/fft_x_t.png>
+Package pdftex.def Info: ./images/fft_x_t.png  used on input line 41.
+(pdftex.def)             Requested size: 250.24199pt x 196.40747pt.
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 40--42
+[][] [] 
+ []
+
+[1
 
 {C:/Users/Lorenzo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./images/
-X_t.png>] [2] (franceschetti_lorenzo_2000263.aux) ) 
+x_t.png> <./images/fft_x_t.png>]
+<./images/fft_x_c.png, id=18, 434.37282pt x 343.2825pt>
+File: ./images/fft_x_c.png Graphic file (type png)
+<use ./images/fft_x_c.png>
+Package pdftex.def Info: ./images/fft_x_c.png  used on input line 70.
+(pdftex.def)             Requested size: 250.24199pt x 197.76826pt.
+<./images/fft_x_c_hat.png, id=19, 435.87843pt x 346.29375pt>
+File: ./images/fft_x_c_hat.png Graphic file (type png)
+<use ./images/fft_x_c_hat.png>
+Package pdftex.def Info: ./images/fft_x_c_hat.png  used on input line 71.
+(pdftex.def)             Requested size: 250.24199pt x 198.81088pt.
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 70--72
+[][] [] 
+ []
+
+[2] [3 <./images/fft_x_c.png> <./images/fft_x_c_hat.png>]
+(franceschetti_lorenzo_2000263.aux) ) 
 Here is how much of TeX's memory you used:
- 1678 strings out of 480898
- 25580 string characters out of 2897345
- 268443 words of memory out of 3000000
- 17589 multiletter control sequences out of 15000+200000
- 536623 words of font info for 38 fonts, out of 3000000 for 9000
+ 1762 strings out of 480898
+ 26895 string characters out of 2897345
+ 270616 words of memory out of 3000000
+ 17665 multiletter control sequences out of 15000+200000
+ 537229 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,34p,713b,217s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/Lorenzo/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Users/Lor
-enzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pf
-b><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi12.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Lorenzo/AppData/Local/Pr
-ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Lorenzo/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Use
-rs/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
-y10.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-cm-super/sfrm1200.pfb>
-Output written on franceschetti_lorenzo_2000263.pdf (2 pages, 101358 bytes).
+ 30i,6n,34p,858b,213s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/Lorenzo/AppData/Local/Programs/M
+iKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Users/Lorenzo/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Lo
+renzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
+fb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Lorenzo/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Lorenzo/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/U
+sers/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr8.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><C:/Users/Lorenzo/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/public/cm-super/sfrm1200.pfb>
+Output written on franceschetti_lorenzo_2000263.pdf (3 pages, 187514 bytes).
 PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
+ 62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
