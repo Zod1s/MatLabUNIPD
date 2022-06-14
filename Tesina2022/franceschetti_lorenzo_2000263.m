@@ -3,7 +3,7 @@ clearvars
 close all
 clc
 
-load audio.mat % Carica il vettore x_t e F
+load audio.mat % Carica il vettore x_t e la frequenza F
 
 %{
     N_t: lunghezza del vettore x_t
@@ -21,7 +21,7 @@ B = 20000;
 %% Q1) Grafici del segnale dato e della sua trasformata di Fourier
 %{
     X_t: trasformata di Fourier del segnale x_t
-    f_t: vettore di frequenze nell'intervallo [-1/(2 * T), 1/(2 * T)) [Hz]
+    f_t: vettore di frequenze nell'intervallo [-1/2 * F, 1/2 * F) [Hz]
 %}
 
 X_t = fftshift(T * fft(x_t));
@@ -55,21 +55,6 @@ Fm = 40000;
 
 [x, X] = demodulation(x_t, T, Fm, B, t_t, f_t);
 
-% figure(3)
-% plot(t_t, x)
-% title("Grafico di $x(t)$",'Interpreter','Latex')
-% xlabel("time (s)",'Interpreter','Latex')
-% ylabel("$x(t)$",'Interpreter','Latex')
-% grid on
-% grid minor
-% figure(4)
-% plot(f_t, abs(X))
-% title("Grafico di $|X(f)|$",'Interpreter','Latex')
-% xlabel("frequency (Hz)",'Interpreter','Latex')
-% ylabel("$|X(f)|$",'Interpreter','Latex')
-% grid on
-% grid minor
-
 player1 = audioplayer(x, F);
 play(player1);
 
@@ -97,21 +82,6 @@ x_t_nffilt = filter(Hnf2, x_t_nffilt);
 %}
 
 [x_nffilt, X_nffilt] = demodulation(x_t_nffilt, T, Fm, B, t_t, f_t);
-
-% figure(5)
-% plot(t_t, x_nffilt)
-% title("Grafico di $x_{nffilt}(t)$",'Interpreter','Latex')
-% xlabel("time (s)",'Interpreter','Latex')
-% ylabel("$x_{nffilt}(t)$",'Interpreter','Latex')
-% grid on
-% grid minor
-% figure(6)
-% title("Grafico di $|X_{nffilt}(f)|$",'Interpreter','Latex')
-% plot(f_t, abs(X_nffilt))
-% xlabel("frequency (Hz)",'Interpreter','Latex')
-% ylabel("$|X_{nffilt}(f)|$",'Interpreter','Latex')
-% grid on
-% grid minor
 
 player2 = audioplayer(x_nffilt, F);
 play(player2);
