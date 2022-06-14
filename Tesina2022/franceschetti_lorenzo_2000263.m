@@ -10,7 +10,7 @@ load audio.mat % Carica il vettore x_t e la frequenza F
     T: periodo di campionamento [s]
     t_t: istanti di tempo in cui è campionato il segnale x_t [s]
     B: larghezza della banda monolatera del segnale x [Hz]
-       massima frequenza udibile dall'orecchio umano
+       (massima frequenza udibile dall'orecchio umano)
 %}
 
 N_t = length(x_t);
@@ -46,14 +46,12 @@ grid minor
 %% Q2) Demodulazione del segnale e ascolto
 %{
     Fm: frequenza di modulazione [Hz]
-        ricavata al passo precedente
     x: segnale x_t demodulato
-    X: trasformata di Fourier del segnale x
 %}
 
 Fm = 40000;
 
-[x, X] = demodulation(x_t, T, Fm, B, t_t, f_t);
+x = demodulation(x_t, T, Fm, B, t_t, f_t);
 
 player1 = audioplayer(x, F);
 play(player1);
@@ -78,10 +76,9 @@ x_t_nffilt = filter(Hnf2, x_t_nffilt);
 %{
     Fm: frequenza di modulazione [Hz] (vedi passo Q2)
     x_nffilt: segnale x_t_nffilt demodulato
-    X_nffilt: trasformata di Fourier di x_nffilt
 %}
 
-[x_nffilt, X_nffilt] = demodulation(x_t_nffilt, T, Fm, B, t_t, f_t);
+x_nffilt = demodulation(x_t_nffilt, T, Fm, B, t_t, f_t);
 
 player2 = audioplayer(x_nffilt, F);
 play(player2);
@@ -95,8 +92,8 @@ play(player2);
 
 Fc = 29400;
 
-% essendo Fc = F / 6, il campionamento equivale a prendere
-% un campione ogni 6
+% essendo Fc = F / 6, l'operazione di campionamento 
+% equivale a prendere un campione ogni 6
 xc = x(1:6:length(t_t));
 
 player3 = audioplayer(xc, Fc);
@@ -121,8 +118,8 @@ x_nffilt_lpfilt = filter(Hlp, x_nffilt);
     xc_hat: segnale x_nffilt_lpfilt campionato alla frequenza Fc 
 %}
 
-% essendo Fc = F / 6, il campionamento equivale a prendere
-% un campione ogni 6
+% essendo Fc = F / 6, l'operazione di campionamento 
+% equivale a prendere un campione ogni 6
 xc_hat = x_nffilt_lpfilt(1:6:length(t_t));
 
 player4 = audioplayer(xc_hat, Fc);
@@ -132,7 +129,7 @@ play(player4)
 %{
     Tc: periodo di campionamento dei due segnali [s]
     Nc: lunghezza del vettore xc
-    fc: vettore di frequenze nell'intervallo [-1/(2 * Tc), 1/(2 * Tc)) [Hz]
+    fc: vettore di frequenze nell'intervallo [-1/2 * Fc, 1/2 * Fc) [Hz]
     Xc: trasformata di Fourier di xc
     Xc_hat: trasformata di Fourier di xc_hat
 %}
@@ -179,7 +176,7 @@ end
 % f: vettore di frequenze
 % xdm: segnale x demodulato
 % Xdm: trasformata di Fourier del segnale xdm
-function [xdm, Xdm] = demodulation(x, T, Fm, B, t, f)
+function xdm = demodulation(x, T, Fm, B, t, f)
     xdm = 2 * x .* cos(2 * pi * Fm * t);
     Xdm = fftshift(T * fft(xdm)) .* rect(f, 2 * B);
     xdm = ifft(ifftshift(Xdm) / T);
