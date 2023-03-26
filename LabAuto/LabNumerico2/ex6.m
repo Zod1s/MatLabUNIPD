@@ -42,7 +42,6 @@ grid on
 plot(u.time, u.data)
 legend("u")
 
-%It can't reject constant disturbances
 %% Open the model
 open_system("motore_PI.slx");
 
@@ -67,5 +66,3 @@ hold on
 grid on
 plot(u_i.time, u_i.data)
 legend("u")
-
-% It can reject constant disturbances
