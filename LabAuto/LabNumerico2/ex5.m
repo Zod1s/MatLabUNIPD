@@ -1,5 +1,5 @@
 %% Initialisation
-clear all
+clear
 close all
 clc
 
@@ -14,13 +14,15 @@ d = 1  /sqrt(2);
 
 s = tf('s');
 z = tf('z', Ts);
+
+%% Transfer functions
 P1 = mot.k / (mot.T * s + 1);
 integ = 1 / s;
 P = P1 * integ;
 
 %% Discretising the model
-P1z = c2d(P1, Ts, "zoh");
-integz = Ts / (z - 1);
+P1z = minreal(c2d(P1, Ts, "zoh"));
+integz = Ts / (z - 1); % 1 / s 
 H2 = minreal(wc^2 / integz / ((1 / integz)^2 + 2 * d * wc * (1 / integz) ...
     + wc^2));
 
@@ -52,8 +54,8 @@ plot(t, w * rads2rpm)
 plot(t, wm * rads2rpm)
 legend("input", "control signal", "actual speed", "measured speed")
 
-%% Getting step response infos of Wu system
-infos = stepinfo(Wu, "SettlingTimeThreshold", 0.05);
+%% Getting step response infos of W system
+infos = stepinfo(W, "SettlingTimeThreshold", 0.05);
 
 %% Using PI controller
 C = (1 + 100 * integz);
@@ -82,7 +84,5 @@ plot(t, wPI * rads2rpm)
 plot(t, wmPI * rads2rpm)
 legend("input", "control signal", "actual speed", "measured speed")
 
-%% Getting step response infos of WuPI system
-infosPI = stepinfo(WuPI, "SettlingTimeThreshold", 0.05);
-
-
+%% Getting step response infos of WPI system
+infosPI = stepinfo(WPI, "SettlingTimeThreshold", 0.05);

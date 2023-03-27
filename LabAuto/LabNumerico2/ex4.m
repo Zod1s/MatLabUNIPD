@@ -1,5 +1,5 @@
 %% Initialisation
-clear all
+clear
 close all
 clc
 
@@ -32,24 +32,27 @@ bode(Hts)
 legend("ideal", "forward", "backward", "tustin")
 
 % Hts approximates best the phase
-% Both Hbe and Hfe are physically implementable
+% Both Hbe and Hfe are physically implementable and approximate best the
+% phase
 
 %% Discretisation of H1
-Hfe1 = minreal(((z - 1) / Ts) / (T * (z - 1) / Ts + 1));
-Hbe1 = minreal(((1 - z^-1) / Ts) / (T * (1 - z^-1) / Ts + 1));
+s1 = (z - 1) / Ts;
+Hfe1 = minreal(s1 / (T * s1 + 1));
+s1 = (1 - z^-1) / Ts;
+Hbe1 = minreal(s1 / (T * s1 + 1));
 Hts1 = minreal(c2d(H1, Ts, "tustin"));
 
 figure(2)
 grid on
 hold on
 bode(H1)
-% bode(Hfe1)
-% bode(Hbe1)
-% bode(Hts1)
-% legend("first order", "forward", "backward", "tustin")
+bode(Hfe1)
+bode(Hbe1)
+bode(Hts1)
+legend("first order", "forward", "backward", "tustin")
 
-% Hts approximates best the phase
-% Both Hbe and Hfe approximate best the magnitude
+% Hts1 approximates best the phase and the magnitude
+% All of the discretised filters are physicallyt implementable
 
 %% Discretisation of H2
 s2 = (z - 1) / Ts;
@@ -67,8 +70,9 @@ bode(Hbe2)
 bode(Hts2)
 legend("second order", "forward", "backward", "tustin")
 
-% Hts approximates best the phase
-% Both Hbe and Hfe approximate best the magnitude
+% Hts2 approximates best the phase
+% Hbe2 approximates best the magnitude
+% All of the discretised filters are physicallyt implementable
 
 %% Generalised H3
 N = 4;
@@ -77,14 +81,15 @@ H3 = (1 - z^-N) / (N * Ts);
 figure(4)
 grid on
 hold on
+bode(H)
 bode(Hbe)
 bode(H3)
-legend("ideal discrete", "general")
+legend("ideal", "ideal discrete", "general")
 
 % H3 has a zero at high frequency, it attenuates more than Hbe
 
 %% Approximating H
-H4 = 1 / (6 * Ts) * (1 + 3 * z^-1 - 3 * z^-2 - z^-3);
+H4 = (1 + 3 * z^-1 - 3 * z^-2 - z^-3) / (6 * Ts);
 
 figure(5)
 hold on
@@ -99,14 +104,14 @@ legend("H4", "ideal")
 k = 0:1:2000;
 t = k * Ts;
 r = 25 * t;
-n = 0.002 * (rand(1, 2001) - 0.5);
+n = 0.002 * (rand(1, length(k)) - 0.5);
 u = r + n;
 
-[num, den] = tfdata(Hbe, 'v');
+[num, den] = tfdata(Hbe,  'v');
 u1  = filter(num, den, u);
-% [num, den] = tfdata(Hfe, 'v');
-% u2  = filter(num, den, u);
-[num, den] = tfdata(Hts, 'v');
+[num, den] = tfdata(Hfe,  'v');
+u2  = filter(num, den(2), u);
+[num, den] = tfdata(Hts,  'v');
 u3  = filter(num, den, u);
 [num, den] = tfdata(Hbe1, 'v');
 u4  = filter(num, den, u);
@@ -120,9 +125,9 @@ u7  = filter(num, den, u);
 u8  = filter(num, den, u);
 [num, den] = tfdata(Hts2, 'v');
 u9  = filter(num, den, u);
-[num, den] = tfdata(H3, 'v');
+[num, den] = tfdata(H3,   'v');
 u10 = filter(num, den, u);
-[num, den] = tfdata(H4, 'v');
+[num, den] = tfdata(H4,   'v');
 u11 = filter(num, den, u);
 
 figure(6)
@@ -134,7 +139,7 @@ figure(7)
 grid on
 hold on
 plot(t, u1)
-% plot(t, u2)
+plot(t, u2)
 plot(t, u3)
 plot(t, u4)
 plot(t, u5)
@@ -144,11 +149,12 @@ plot(t, u8)
 plot(t, u9)
 plot(t, u10)
 plot(t, u11)
-legend("Hbe", "Hts", "Hbe1", "Hfe1", "Hts1", "Hbe2", "Hfe2", "Hts2", ...
+legend("Hbe", "Hfe", "Hts", "Hbe1", "Hfe1", "Hts1", "Hbe2", "Hfe2", "Hts2", ...
     "H3", "H4")
 
 %% Computing variance
 vars = [var(u1(100:end))
+        var(u2(100:end))
         var(u3(100:end))
         var(u4(100:end))
         var(u5(100:end))
@@ -158,6 +164,8 @@ vars = [var(u1(100:end))
         var(u9(100:end))
         var(u10(100:end))
         var(u11(100:end))];
-% var2 = var(u2(100:end));
+
+minimum = find(vars == min(vars));
 
 % The minimum variance is for u7, so Hbe2
+
