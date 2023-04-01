@@ -10,7 +10,7 @@ mot.k = 5.2;
 mot.T = 0.03;
 Ts = 0.001;
 wc = 2 * pi * 50;
-d = 1  /sqrt(2);
+d = 1 / sqrt(2);
 
 s = tf('s');
 z = tf('z', Ts);
