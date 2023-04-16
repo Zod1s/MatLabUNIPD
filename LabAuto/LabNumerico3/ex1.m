@@ -60,14 +60,3 @@ grid on
 yline(dth0)
 plot(dth.time, dth.data)
 legend("DTheta")
-
-
-
-
-
-
-
-
-
-
-
