@@ -16,19 +16,19 @@ Ie = I + m * l^2;
 Me = M + m;
 
 %% Initial conditions
-x0 = 0;
-dx0 = 0;
-th0 = pi;
+x0 = 1;
+dx0 = 0.1;
+th0 = pi * 7 / 8;
 dth0 = 0;
 
 %% Opening the model
-open_system("nl_cart.slx")
+open_system("nl_cart_1.slx")
 
 %% Simulating
-set_param("nl_cart", "SolverType", "Variable-step", "Solver", "ode45", ...
+set_param("nl_cart_1", "SolverType", "Variable-step", "Solver", "ode45", ...
     "MaxStep", "0.0001", "StopTime", "5");
 
-sim("nl_cart");
+sim("nl_cart_1");
 
 %% Plotting results
 figure(1)
