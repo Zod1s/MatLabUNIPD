@@ -35,28 +35,28 @@ figure(1)
 subplot(2, 2, 1)
 hold on
 grid on
-yline(x0)
+yline(x0, '--')
 plot(x.time, x.data)
-legend("X")
+legend("x0", "x")
 
 subplot(2, 2, 3)
 hold on
 grid on
-yline(dx0)
+yline(dx0, '--')
 plot(dx.time, dx.data)
-legend("DX")
+legend("dx0", "dx")
 
 subplot(2, 2, 2)
 hold on
 grid on
-yline(th0)
-yline(pi)
+yline(th0, '--')
+yline(pi, '--')
 plot(th.time, th.data)
-legend("Theta")
+legend("theta0", "\pi", "theta")
 
 subplot(2, 2, 4)
 hold on
 grid on
 yline(dth0)
 plot(dth.time, dth.data)
-legend("DTheta")
+legend("dtheta0", "dtheta")

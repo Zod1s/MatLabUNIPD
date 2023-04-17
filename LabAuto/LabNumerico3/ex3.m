@@ -21,12 +21,15 @@ k2 = -1.1;
 k3 = 7.5;
 k4 = 0.7;
 K = [k1, k2, k3, k4];
-e = 1;
+e = 1; % To enable disturbance
+d.A = 1;
+d.start = 20;
+d.end = 20.1;
 
 %% Initial conditions
-x0 = 10;
+x0 = 0;
 dx0 = 0;
-th0 = 0;
+th0 = pi / 8;
 dth0 = 0;
 
 %% Simulink
@@ -34,7 +37,7 @@ open_system("nl_cart_3.slx")
 
 %% Simulating
 set_param("nl_cart_3", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.1", "StopTime", "25");
+    "MaxStep", "0.001", "StopTime", "40");
 
 sim("nl_cart_3")
 
@@ -43,29 +46,30 @@ figure(1)
 subplot(2, 2, 1)
 hold on
 grid on
-yline(x0)
+yline(x0, '--r')
 plot(x.time, x.data)
 legend("x0", "x")
 
 subplot(2, 2, 3)
 hold on
 grid on
-yline(dx0)
+yline(dx0, '--r')
 plot(dx.time, dx.data)
 legend("dx0", "dx")
 
 subplot(2, 2, 2)
 hold on
 grid on
-yline(th0)
-yline(pi)
+yline(th0, '--r')
+yline(0, '--g')
+yline(pi, '--b')
 plot(th.time, th.data)
-legend("theta0", "theta")
+legend("theta0", "0", "\pi", "theta")
 
 subplot(2, 2, 4)
 hold on
 grid on
-yline(dth0)
+yline(dth0, '--r')
 plot(dth.time, dth.data)
 legend("dtheta0", "dtheta")
 
