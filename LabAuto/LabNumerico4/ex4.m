@@ -32,6 +32,10 @@ grid on
 rlocus(prop)
 % For every k > 0, there is always a real positive pole, so the system
 % is unstable
+% Using kcrit = margin(prop) gives the k for which the branches cross the 
+% imaginary axis. From the rlocus, it can be determined whether kcrit is
+% the maximum k allowed or the minimum k allowed for stability.
+
 
 %% PI controller for Pth
 propi = minreal(feedback(Pth / s, 1));
