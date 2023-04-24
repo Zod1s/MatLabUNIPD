@@ -12,7 +12,7 @@ tausf = 1e-2; %[Nm]
 %% Simulink model
 open_system("motor1.slx")
 
-
+%%
 
 
 
