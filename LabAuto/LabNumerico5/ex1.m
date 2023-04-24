@@ -25,7 +25,7 @@ us.f = -6; %[V]
 open_system("motor1.slx")
 
 %% Simulate
-set_param("motor1", "SolverType", "Fixed-step", "Solver", "ode3", ...
+set_param("motor1", "SolverType", "Variable-step", "Solver", "ode45", ...
     "MaxStep", "0.0001", "StopTime", "0.1");
 
 sim("motor1");
@@ -41,13 +41,18 @@ legend("u")
 subplot(2, 2, 2)
 hold on
 grid on
-plot(w.time, w.data)
-legend("w")
+plot(u1.time, u1.data)
+legend("u1")
 
 subplot(2, 2, 3)
 hold on
 grid on
-plot(wl.time, wl.data)
-legend("w_{l}")
+plot(u2.time, u2.data)
+legend("u2")
 
+subplot(2, 2, 4)
+hold on
+grid on
+plot(u3.time, u3.data)
+legend("u3")
 
