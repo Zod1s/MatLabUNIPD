@@ -11,7 +11,7 @@ while abs(dif) > tol && iter < itmax
       iter = iter + 1;
       fx = fun(xold);  %% f(xk)
       dfx = dfun(xold); %% f'(xk)
-      dif = -fx/dfx;
+      dif = -fx / dfx;
       xnew = xold + dif;
       xold = xnew;
       xvec = [xvec xnew];

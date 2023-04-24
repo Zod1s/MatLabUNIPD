@@ -11,7 +11,6 @@ xvec = x0;
 scarti = [];
 
 while abs(dif) > tol && iter < itmax
-
       dif = -(fun(xold)^2) / (fun(xold + fun(xold)) - fun(xold));
       xnew = xold + dif;
       xvec = [xvec xnew];
