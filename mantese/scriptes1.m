@@ -1,6 +1,6 @@
-%% questo script risolve l'equazione x^3+2x^2-tanx=0.564 con vari metodi
+%% questo script risolve l'equazione x^3 + 2x^2 - tanx = 0.564 con vari metodi
 %  iterativi numero di matricola = 2069264;
-%  z=264; a=0.3+z*0.001=0.564
+%  z = 264; a = 0.3 + z * 0.001 = 0.564
 clc
 clear
 close all
@@ -90,9 +90,9 @@ clear x0 xvec scarti iter MN errK;
 
 fprintf('\n\ncalcoli di Newton-Raphson');
 fprintf('\n\nnumero iterazioni      soluzione finale        approssimazione M       stima erorre         errore vero\n');
-fprintf('               %i           %10.9f              %10.9f       %10.6e        %10.6e\n',MatRisN(1,:));
-fprintf('               %i            %10.9f              %10.9f       %10.6e       %10.6e\n',MatRisN(2,:));
-fprintf('               %i            %10.9f              %10.9f       %10.6e       %10.6e\n',MatRisN(3,:));
+fprintf('               %i           %10.9f              %10.9f       %10.6e        %10.6e\n', MatRisN(1, :));
+fprintf('               %i            %10.9f              %10.9f       %10.6e       %10.6e\n', MatRisN(2, :));
+fprintf('               %i            %10.9f              %10.9f       %10.6e       %10.6e\n', MatRisN(3, :));
 
 %% approssimo csi1 e csi2 col metodo di steffensen e visualizzo i risultati
 
@@ -136,7 +136,6 @@ if abs(dg(csi1)) < 1
     legend({'convergenza di newton', 'convergenza di Steffensen', ...
         'convergenza di Punto Fisso'}, 'Location', 'northeast')
     hold on
-
 else
     fprintf('\nil metodo di punto fisso non converge intorno a %3.5f\n', csi1);
     matRisPF = [0, 0, 0, 0, 0];
@@ -159,7 +158,6 @@ if abs(dg(csi2)) < 1
     legend({'convergenza di newton', 'convergenza di Steffensen', ...
         'convergenza di Punto Fisso'}, 'Location', 'northeast')
     hold on
-
 else
     fprintf('\nil metodo di punto fisso non converge intorno a %3.5f\n', csi2);
     matRisPF = [matRisPF; 0, 0, 0, 0, 0];
@@ -193,9 +191,9 @@ end
 
 fprintf('\n\ncalcoli di Punto Fisso');
 fprintf('\n\nnumero iterazioni       soluzione finale        approssimazione M       stima erorre         errore vero\n');
-fprintf('              %i           %10.9f              %10.9f       %10.6e        %10.6e\n',matRisPF(1,:));
-fprintf('                %i            %10.9f              %10.9f       %10.6e        %10.6e\n',matRisPF(2,:));
-fprintf('               %i            %10.9f              %10.9f       %10.6e        %10.6e\n',matRisPF(3,:));
+fprintf('              %i           %10.9f              %10.9f       %10.6e        %10.6e\n', matRisPF(1, :));
+fprintf('                %i            %10.9f              %10.9f       %10.6e        %10.6e\n', matRisPF(2, :));
+fprintf('               %i            %10.9f              %10.9f       %10.6e        %10.6e\n', matRisPF(3, :));
 
 clear MPF errK scarti xvec iter x0 itmax tol;
 
