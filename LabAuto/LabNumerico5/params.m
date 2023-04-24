@@ -23,6 +23,7 @@ mot.IN = mot.PN / mot.UN; % nominal current
 mot.tauN = mot.Kt * mot.IN; % nominal torque
 mot.taus = 2.42 * ozin2Nm; % stall torque
 mot.w0 = 7200 * rpm2rads; % no−load speed
+
 %% Gearbox nominal parameters
 % planetary gearbox Micromotor SA 23/1
 gbox.N1 = 14; % 1st reduction ratio (planetary gearbox)
