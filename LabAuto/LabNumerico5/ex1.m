@@ -16,17 +16,16 @@ diff.wc = 2 * pi * 50;
 diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
-diff.d = 1;
+diff.type = 3;
 us.t = 1.5; %[s]
-us.i = 6; %[V]
-us.f = -6; %[V]
+us.A = -6; %[V]
 
 %% Simulink model
 open_system("motor1.slx")
 
 %% Simulate
 set_param("motor1", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", "0.1");
+    "MaxStep", "0.0001", "StopTime", "18");
 
 sim("motor1");
 
@@ -36,23 +35,49 @@ subplot(2, 2, 1)
 hold on
 grid on
 plot(u.time, u.data)
-legend("u")
+ylabel("u [V]")
+xlabel("t [s]")
 
 subplot(2, 2, 2)
 hold on
 grid on
-plot(u1.time, u1.data)
-legend("u1")
+plot(wl.time, wl.data)
+plot(w.time, w.data, "--")
+ylabel("\omega_{l} [rpm]")
+legend("real","measured")
+xlabel("t [s]")
 
 subplot(2, 2, 3)
 hold on
 grid on
-plot(u2.time, u2.data)
-legend("u2")
+plot(thl.time, thl.data)
+plot(thl.time, thl.data, "--")
+ylabel("\theta_{l} [deg]")
+legend("real","measured")
+xlabel("t [s]")
 
 subplot(2, 2, 4)
 hold on
 grid on
-plot(u3.time, u3.data)
-legend("u3")
+plot(ia.time, ia.data)
+ylabel("i_{a} [A]")
+xlabel("t [s]")
 
+%% Comparing Bode plots of derivative filters
+s = tf('s');
+z = tf('z', diff.Ts);
+
+H1 = s / (diff.Tc * s + 1);
+H2 = diff.wc^2 * s / (s^2 + 2 * diff.d * diff.wc * s + diff.wc^2);
+H3 = (1 - z^-diff.N) / (diff.Ts * diff.N);
+
+figure(2)
+hold on
+grid on
+bode(H1)
+bode(H2)
+bode(H3)
+legend("H1", "H2", "H3")
+
+% H2 and H3 attenuate high frequencies, whereas H1 has a nearly constant
+% gain at high frequencies, so it doesn't attenuate noise.
