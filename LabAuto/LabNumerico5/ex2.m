@@ -16,9 +16,11 @@ diff.wc = 2 * pi * 50;
 diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
-diff.type = 3;
-us.t = 1.5; %[s]
-us.A = -6; %[V]
+diff.type = 2;
+wlstar.T = 3; %[s]
+wlstar.A = -250; %[rpm]
+pid.Kp = 0.01;
+pid.Ki = 4;
 
 %% Simulink model
 open_system("motor2.slx")
@@ -43,17 +45,16 @@ hold on
 grid on
 plot(wl.time, wl.data)
 plot(w.time, w.data, "--")
+plot(wl_star.time, wl_star.data)
 ylabel("\omega_{l} [rpm]")
-legend("real","measured")
+legend("real", "measured", "reference")
 xlabel("t [s]")
 
 subplot(2, 2, 3)
 hold on
 grid on
-plot(thl.time, thl.data)
-plot(thl.time, thl.data, "--")
-ylabel("\theta_{l} [deg]")
-legend("real","measured")
+plot(e.time, e.data)
+ylabel("e [rpm]")
 xlabel("t [s]")
 
 subplot(2, 2, 4)
@@ -62,3 +63,8 @@ grid on
 plot(ia.time, ia.data)
 ylabel("i_{a} [A]")
 xlabel("t [s]")
+
+% P controller isn't capable of tracking a constant reference due to its
+% lack of a pole in the origin, so the type of the system is 0. PI
+% controller has a pole in the origin, so the system is type 1 and is
+% capable of tracking constant references with zero steady-state error.
