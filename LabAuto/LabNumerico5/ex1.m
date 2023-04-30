@@ -17,7 +17,7 @@ diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
 diff.type = 3;
-us.t = 1.5; %[s]
+us.t = 3; %[s]
 us.A = -6; %[V]
 
 %% Simulink model
