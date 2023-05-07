@@ -16,7 +16,7 @@ diff.wc = 2 * pi * 50;
 diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
-diff.type = 3;
+diff.type = 2;
 us.t = 1.5; %[s]
 us.A = -6; %[V]
 
@@ -35,33 +35,33 @@ subplot(2, 2, 1)
 hold on
 grid on
 plot(u.time, u.data)
-ylabel("u [V]")
-xlabel("t [s]")
+ylabel("$u$ [V]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 2, 2)
 hold on
 grid on
 plot(wl.time, wl.data)
 plot(w.time, w.data, "--")
-ylabel("\omega_{l} [rpm]")
+ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 legend("real","measured")
-xlabel("t [s]")
 
 subplot(2, 2, 3)
 hold on
 grid on
 plot(thl.time, thl.data)
 plot(thl.time, thl.data, "--")
-ylabel("\theta_{l} [deg]")
+ylabel("$\theta_{l}$ [deg]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 legend("real","measured")
-xlabel("t [s]")
 
 subplot(2, 2, 4)
 hold on
 grid on
 plot(ia.time, ia.data)
-ylabel("i_{a} [A]")
-xlabel("t [s]")
+ylabel("$i_{a}$ [A]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 %% Comparing Bode plots of derivative filters
 s = tf('s');

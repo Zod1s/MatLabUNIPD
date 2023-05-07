@@ -37,8 +37,8 @@ subplot(2, 2, 1)
 hold on
 grid on
 plot(u.time, u.data)
-ylabel("u [V]")
-xlabel("t [s]")
+ylabel("$u$ [V]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 2, 2)
 hold on
@@ -46,23 +46,23 @@ grid on
 plot(wl.time, wl.data)
 plot(w.time, w.data, "--")
 plot(wl_star.time, wl_star.data)
-ylabel("\omega_{l} [rpm]")
+ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
 legend("real", "measured", "reference")
-xlabel("t [s]")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 2, 3)
 hold on
 grid on
 plot(e.time, e.data)
-ylabel("e [rpm]")
-xlabel("t [s]")
+ylabel("$e$ [rpm]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 2, 4)
 hold on
 grid on
 plot(ia.time, ia.data)
-ylabel("i_{a} [A]")
-xlabel("t [s]")
+ylabel("$i_{a}$ [A]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 % P controller isn't capable of tracking a constant reference due to its
 % lack of a pole in the origin, so the type of the system is 0. PI
