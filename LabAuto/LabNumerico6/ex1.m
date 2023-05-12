@@ -42,13 +42,13 @@ C = Kp + Ki / s;
 
 %% Closed-loop function evaluation
 W = feedback(C * P, 1);
-figure(1)
+figure(2)
 hold on
 grid on
 step(W)
 stepinfo(W, "SettlingTimeThreshold", 0.05)
 
-figure(2)
+figure(3)
 hold on
 grid on
 margin(W)
@@ -64,22 +64,42 @@ diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
 diff.type = 2;
-wlstar.T = 3; %[s]
-wlstar.A = -250; %[rpm]
 pid.Kp = Kp;
 pid.Ki = Ki;
+
+%% Step response
+step.T = 3; %[s]
+step.A = -250; %[rpm]
+step.simtime = "18";
+
+%% Staircase response
+stair.dw = 50; %[rpm]
+stair.dt = 5; %[s]
+stair.time = 45;
+stair.k = 1:((stair.time / stair.dt) + 1);
+stair.simtime = string(stair.time);
+
+%% Triangular wave
+triang.A = 450; %[rpm/s]
+triang.dt = 1; %[s]
+triang.time = 20;
+triang.times = 0:triang.time;
+triang.values = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0];
+triang.simtime = string(triang.time);
 
 %% Opening system
 open_system("motor.slx")
 
 %% Simulate
+input = 3;
+
 set_param("motor", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", "18");
+    "MaxStep", "0.0001", "StopTime", triang.simtime);
 
 sim("motor");
 
 %% Plotting results
-figure(1)
+figure(4)
 subplot(2, 2, 1)
 hold on
 grid on
@@ -114,13 +134,6 @@ xlabel("$t$ [s]", "Interpreter", "latex")
 % Overshoot specification is not satisfied due to the fact that it was
 % designed based on a semplification of the real dinamics, so it is an
 % approximation of its behaviour.
-
-%% Staircase response
-dw = 50; %[rpm]
-dt = 5; %[s]
-N = 10;
-k = 1:N;
-
 
 
 
