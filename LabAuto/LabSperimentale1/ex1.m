@@ -3,55 +3,55 @@ clc
 clear
 close all
 
-%% Parameters
+% %% Parameters
 load('params.mat')
-s = tf('s');
+% s = tf('s');
 Beq = 1.26e-6; %[Nm / (rad/s)]
-Req = sens.curr.Rs + mot.R; %[ohm]
+% Req = sens.curr.Rs + mot.R; %[ohm]
 Jeq = mot.J + mld.J / gbox.N^2; %[kg m^2]
-km = drv.dcgain * mot.Kt / (Req * Beq + mot.Kt * mot.Ke);
-Tm = Req * Jeq / (Req * Beq + mot.Kt * mot.Ke);
-
-P = km / (gbox.N * (Tm * s + 1)); % Omegal / U
-
-%% Bode plot of P
-figure(1)
-hold on
-grid on
-bode(P)
-
-%% Spec of controller
-% A PI controller introduces a pole in zero, that allows perfect steady
-% state tracking of a constant reference and perfect steady state rejection
-% of constant disturbances.
-tsmax = 0.18; %[s]
-Mpmax = 0.088; %[%]
-
-% Converting time specs to frequency specs
-delta = -log(Mpmax) / sqrt(pi^2 + (log(Mpmax))^2);
-wgc = 3 / (delta * tsmax);
-phim = atan2(2 * delta, sqrt(sqrt(1 + 4 * delta^4) - 2 * delta^2));
-
-% Determining Ki and Kp
-p = evalfr(P, wgc * 1j);
-DK = 1 / abs(p);
-DP = -pi + phim - angle(p);
-Kp = DK * cos(DP);
-Ki = -wgc * DK * sin(DP);
-C = Kp + Ki / s;
-
-%% Closed-loop function evaluation
-W = feedback(C * P, 1);
-figure(2)
-hold on
-grid on
-step(W)
-stepinfo(W, "SettlingTimeThreshold", 0.05)
-
-figure(3)
-hold on
-grid on
-margin(W)
+% km = drv.dcgain * mot.Kt / (Req * Beq + mot.Kt * mot.Ke);
+% Tm = Req * Jeq / (Req * Beq + mot.Kt * mot.Ke);
+% 
+% P = km / (gbox.N * (Tm * s + 1)); % Omegal / U
+% 
+% %% Bode plot of P
+% figure(1)
+% hold on
+% grid on
+% bode(P)
+% 
+% %% Spec of controller
+% % A PI controller introduces a pole in zero, that allows perfect steady
+% % state tracking of a constant reference and perfect steady state rejection
+% % of constant disturbances.
+% tsmax = 0.18; %[s]
+% Mpmax = 0.088; %[%]
+% 
+% % Converting time specs to frequency specs
+% delta = -log(Mpmax) / sqrt(pi^2 + (log(Mpmax))^2);
+% wgc = 3 / (delta * tsmax);
+% phim = atan2(2 * delta, sqrt(sqrt(1 + 4 * delta^4) - 2 * delta^2));
+% 
+% % Determining Ki and Kp
+% p = evalfr(P, wgc * 1j);
+% DK = 1 / abs(p);
+% DP = -pi + phim - angle(p);
+% Kp = DK * cos(DP);
+% Ki = -wgc * DK * sin(DP);
+% C = Kp + Ki / s;
+% 
+% %% Closed-loop function evaluation
+% W = feedback(C * P, 1);
+% figure(2)
+% hold on
+% grid on
+% step(W)
+% stepinfo(W, "SettlingTimeThreshold", 0.05)
+% 
+% figure(3)
+% hold on
+% grid on
+% margin(W)
 
 %% Motor parameters
 tausf = 1e-2; %[Nm]
@@ -64,8 +64,8 @@ diff.d = 1 / sqrt(2);
 diff.N = 10;
 diff.Ts = 0.001;
 diff.type = 2;
-pid.Kp = Kp;
-pid.Ki = Ki;
+pid.Kp = 0.0298; % Kp;
+pid.Ki = 6.5015; % Ki;
 
 %% Step response
 step.T = 3; %[s]
@@ -92,7 +92,7 @@ triang.simtime = "20";
 open_system("motor.slx")
 
 %% Simulate
-input = 3;
+input = 1;
 
 set_param("motor", "SolverType", "Variable-step", "Solver", "ode45", ...
     "MaxStep", "0.0001", "StopTime", step.simtime);
