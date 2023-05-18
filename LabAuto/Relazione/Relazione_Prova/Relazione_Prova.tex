@@ -1,3 +1,4 @@
+% LTeX: language=it
 \documentclass[a4paper,11pt, Arial]{article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,7 +7,9 @@
 %\usepackage{mathrsfs}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{array}
 \usepackage{epsfig}
+\usepackage{float}
 %\usepackage[sectionbib]{chapterbib}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
@@ -24,17 +27,12 @@
 \newcommand{\class}{Laboratorio di Automatica}
 \newcommand{\expT}{Controllo PI di un motore CC}
 \newcommand{\repN}{1}
-\newcommand{\stud}{Lorenzo Franceschetti, Leonardo Luigi Pepe, Federico Saporiti}
-\newcommand{\studN}{2000263}
+\newcommand{\stud}{Lorenzo Franceschetti, 2000263\\ Leonardo Luigi Pepe, 2020202\\ Federico Saporiti, 2020202\\}
 \newcommand{\dateD}{15 Maggio 2023}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\textheight}{710pt}
 \renewcommand{\topmargin}{-12pt}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %\renewcommand{\baselinestretch}{1.5}
@@ -44,7 +42,7 @@
     \hline
     \large
     \vspace{-2pt}
-    {\stud} \hfill {\studN}
+    \stud \hfill
     \Large
     \begin{center}
     {\color{BrickRed}
