@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -13,14 +16,29 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\providecommand\babel@aux[2]{}
-\@nameuse{bbl@beforestart}
+\bbl@cs{beforestart}
 \babel@aux{italian}{}
 \babel@aux{italian}{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Sezione}{1}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Sottosezione}{1}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1}Sottosottosezione}{1}{subsubsection.1.1.1}\protected@file@percent }
-\newlabel{LastPage}{{}{1}{}{page.1}{}}
-\xdef\lastpage@lastpage{1}
-\xdef\lastpage@lastpageHy{1}
-\gdef \@abspage@last{1}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduzione}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Scopo dell'attività}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Organizzazione della relazione}{1}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Modellazione del motore tramite Simulink}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Disegno del modello}{1}{subsection.2.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{Lab5:first}{{1a}{2}{Filtro a tempo continuo del primo ordine\relax }{figure.caption.1}{}}
+\newlabel{sub@Lab5:first}{{a}{2}{Filtro a tempo continuo del primo ordine\relax }{figure.caption.1}{}}
+\newlabel{Lab5:second}{{1b}{2}{Filtro a tempo continuo del secondo ordine\relax }{figure.caption.1}{}}
+\newlabel{sub@Lab5:second}{{b}{2}{Filtro a tempo continuo del secondo ordine\relax }{figure.caption.1}{}}
+\newlabel{Lab5:discrete}{{1c}{2}{Filtro discreto del decimo ordine\relax }{figure.caption.1}{}}
+\newlabel{sub@Lab5:discrete}{{c}{2}{Filtro discreto del decimo ordine\relax }{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Simulazione velocità\relax }}{2}{figure.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Modulo FDT\relax }}{2}{figure.caption.2}\protected@file@percent }
+\newlabel{Lab5:mags}{{2}{2}{Modulo FDT\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Controllo in retroazione di velocità}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Progettazione controllore PI}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Verifica sperimentale del comportamento del controllore}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}}{2}{subsection.4.1}\protected@file@percent }
+\newlabel{LastPage}{{}{2}{}{page.2}{}}
+\xdef\lastpage@lastpage{2}
+\xdef\lastpage@lastpageHy{2}

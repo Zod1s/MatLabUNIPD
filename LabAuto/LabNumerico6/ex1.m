@@ -92,10 +92,10 @@ triang.simtime = "20";
 open_system("motor.slx")
 
 %% Simulate
-input = 2;
+input = 1;
 
 set_param("motor", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", stair.simtime);
+    "MaxStep", "0.0001", "StopTime", step.simtime);
 
 sim("motor");
 

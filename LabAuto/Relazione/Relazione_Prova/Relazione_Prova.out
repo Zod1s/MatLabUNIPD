@@ -1,3 +1,10 @@
-\BOOKMARK [1][-]{section.1}{\376\377\000S\000e\000z\000i\000o\000n\000e}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{\376\377\000S\000o\000t\000t\000o\000s\000e\000z\000i\000o\000n\000e}{section.1}% 2
-\BOOKMARK [3][-]{subsubsection.1.1.1}{\376\377\000S\000o\000t\000t\000o\000s\000o\000t\000t\000o\000s\000e\000z\000i\000o\000n\000e}{subsection.1.1}% 3
+\BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Scopo dell'attivit\340}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Organizzazione della relazione}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Modellazione del motore tramite Simulink}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Disegno del modello}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Controllo in retroazione di velocit\340}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Progettazione controllore PI}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Verifica sperimentale del comportamento del controllore}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{}{section.4}% 10
