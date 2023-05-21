@@ -3,6 +3,8 @@ clc
 clear
 close all
 
+% re-evaluate intervals for ia
+
 %% Parameters
 load('params.mat')
 load('responses.mat')
@@ -63,7 +65,7 @@ s = tf('s');
 wc = 2 * pi * 20;
 d = 1 / sqrt(2);
 Ts = 0.001;
-Hc = wc^2 / (s^2 + 2 * d * wc^2 * s + wc^2);
+Hc = wc^2 / (s^2 + 2 * d * wc * s + wc^2);
 Hd = c2d(Hc, Ts, 'tustin');
 [numHd, denHd] = tfdata(Hd, 'v');
 
@@ -141,7 +143,7 @@ tsf_neg = est_neg(2);
 
 %% Average estimations
 B_est = (B_pos + B_neg) / 2;
-tsf_est = (tsf_pos + tsf_neg) / 2;
+tsf_est = (abs(tsf_pos) + abs(tsf_neg)) / 2;
 
 %% Plotting results
 figure(3)
