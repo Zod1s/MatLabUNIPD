@@ -104,7 +104,15 @@ xlabel("$t$ [s]", "Interpreter", "latex")
 % 5 -> th
 % 6 -> ia
 
-
+%% Plots
+figure(5)
+hold on
+grid on
+plot(triang_resp.time, triang_resp.signals(4).values, "--")
+plot(triang_resp.time, triang_resp.signals(1).values)
+ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
+legend("measured", "reference")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 
 
