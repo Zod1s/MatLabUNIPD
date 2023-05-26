@@ -83,7 +83,7 @@ H3 = (1 - z^-diff.N) / (diff.Ts * diff.N);
 
 figure(2)
 hold on
-grid on
+grid onsìsì
 bode(H1)
 bode(H2)
 bode(H3)
