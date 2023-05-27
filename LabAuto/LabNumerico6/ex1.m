@@ -11,7 +11,6 @@ Req = sens.curr.Rs + mot.R; %[ohm]
 Jeq = mot.J + mld.J / gbox.N^2; %[kg m^2]
 km = drv.dcgain * mot.Kt / (Req * Beq + mot.Kt * mot.Ke);
 Tm = Req * Jeq / (Req * Beq + mot.Kt * mot.Ke);
-
 P = km / (gbox.N * (Tm * s + 1)); % Omegal / U
 
 %% Bode plot of P
@@ -135,13 +134,3 @@ xlabel("$t$ [s]", "Interpreter", "latex")
 % Overshoot specification is not satisfied due to the fact that it was
 % designed based on a semplification of the real dinamics, so it is an
 % approximation of its behaviour.
-
-
-
-
-
-
-
-
-
-

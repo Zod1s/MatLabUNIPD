@@ -5,11 +5,11 @@ close all
 
 %% Parameters
 load('params.mat')
-Beq = 1.26e-6; %[Nm / (rad/s)]
-Jeq = mot.J + mld.J / gbox.N^2; %[kg m^2]
+Beq = 1.1e-6; %[Nm / (rad/s)]
+Jeq = 5.86e-7; %[kg m^2]
 
 %% Motor parameters
-tausf = 1e-2; %[Nm]
+tausf = 0.97e-2; %[Nm]
 dac.Ts = 0.001; %[s]
 dac.q = 20 / (2^16 - 1); %[V]
 dac.V = 10; %[V]
