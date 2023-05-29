@@ -25,20 +25,21 @@ pid.Kp = 0.0298;
 pid.Ki = 6.5015;
 awu.Tw = 0.03;
 awu.en = 0;
+ff.en = 1;
 
-%% Step response
-step.T = 1; %[s]
-step.A = 450; %[rpm]
-step.simtime = "5";
+%% Input function
+in.a = 900; %[rpm / s]
+in.t = 0.5; %[s]
+in.simtime = "3";
 
 %% Opening system
-open_system("motor1.slx")
+open_system("motor2.slx")
 
 %% Simulate
-set_param("motor1", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", step.simtime);
+set_param("motor2", "SolverType", "Variable-step", "Solver", "ode45", ...
+    "MaxStep", "0.0001", "StopTime", in.simtime);
 
-sim("motor1");
+sim("motor2");
 
 %% Plotting results
 figure(4)
@@ -72,12 +73,20 @@ grid on
 plot(e.time, e.data)
 ylabel("$e$ [rpm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
+ylim([-40 40])
 
 subplot(2, 3, 4)
 hold on
 grid on
 plot(ia.time, ia.data)
 ylabel("$i_{a}$ [A]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
+
+subplot(2, 3, 6)
+hold on
+grid on
+plot(al_star.time, al_star.data)
+ylabel("$a_{l}$ [rpm / s]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 % Overshoot specification is not satisfied due to the fact that it was

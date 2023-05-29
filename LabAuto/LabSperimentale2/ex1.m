@@ -68,12 +68,12 @@ Hd = c2d(Hc, Ts, 'tustin');
 [numHd, denHd] = tfdata(Hd, 'v');
 
 %% Evaluating intervals
-% figure(2)
-% hold on
-% grid on
-% plot(stair_resp_neg.time, ia_neg)
-% ylabel("$i_{a}$ [A]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
+figure(2)
+hold on
+grid on
+plot(w_pos.time, w_pos.data)
+ylabel("$i_{a}$ [A]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
 
 %% Creating the matrix of positive regressors for wl and tsf
 intervals_wl_pos = [
@@ -88,9 +88,10 @@ intervals_wl_pos = [
     [40.5   45]
 ];
 
-intervals_wl_pos = intervals_wl_pos / Ts + 1;
+intervals_wl_pos = int64(intervals_wl_pos / Ts + 1);
 
 wl_pos = stair_resp_pos.signals(4).values; % [rpm]
+% wl_pos = w_pos.data;
 
 wl_avg_pos = zeros(9, 1);
 for i = 1:9
@@ -103,6 +104,7 @@ phi_pos = [wm_pos, tau_pos];
 
 %% Calculating positive current
 ia_pos = filter(numHd, denHd, stair_resp_pos.signals(6).values);
+% ia_pos_data = filter(numHd, denHd, ia_pos.data);
 
 intervals_ia_pos = [
     [ 0.5  4.6];
@@ -116,7 +118,7 @@ intervals_ia_pos = [
     [40.5   45]
 ];
 
-intervals_ia_pos = intervals_ia_pos / Ts + 1;
+intervals_ia_pos = int64(intervals_ia_pos / Ts + 1);
 
 ia_avg_pos = zeros(9, 1);
 for i = 1:9
@@ -143,9 +145,10 @@ intervals_wl_neg = [
     [40.5   45]
 ];
 
-intervals_wl_neg = intervals_wl_neg / Ts + 1;
+intervals_wl_neg = int64(intervals_wl_neg / Ts + 1);
 
 wl_neg = stair_resp_neg.signals(4).values;
+% wl_neg = w_neg.data;
 
 wl_avg_neg = zeros(9, 1);
 for i = 1:9
@@ -158,6 +161,7 @@ phi_neg = [wm_neg, tau_neg];
 
 %% Calculating positive current
 ia_neg = filter(numHd, denHd, stair_resp_neg.signals(6).values);
+% ia_neg_data = filter(numHd, denHd, ia_neg.data);
 
 intervals_ia_neg = [
     [ 0.5  4.6];
@@ -171,7 +175,7 @@ intervals_ia_neg = [
     [40.5   45]
 ];
 
-intervals_ia_neg = intervals_ia_neg / Ts + 1;
+intervals_ia_neg = int64(intervals_ia_neg / Ts + 1);
 
 ia_avg_neg = zeros(9, 1);
 for i = 1:9
@@ -180,7 +184,7 @@ end
 
 taum_neg = mot.Kt * ia_avg_neg;
 
-%% Finding positive values
+%% Finding negative values
 est_neg = phi_neg\taum_neg;
 Beq_neg = est_neg(1);
 tsf_neg = est_neg(2);

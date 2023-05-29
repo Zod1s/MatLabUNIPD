@@ -72,7 +72,7 @@ step.A = -250; %[rpm]
 step.simtime = "18";
 
 %% Staircase response
-stair.dw = 50; %[rpm]
+stair.dw = -50; %[rpm]
 stair.dt = 5; %[s]
 stair.time = 45;
 stair.k = 1:((stair.time / stair.dt) + 1);
@@ -91,10 +91,10 @@ triang.simtime = "20";
 open_system("motor.slx")
 
 %% Simulate
-input = 1;
+input = 3;
 
 set_param("motor", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", step.simtime);
+    "MaxStep", "0.0001", "StopTime", stair.simtime);
 
 sim("motor");
 

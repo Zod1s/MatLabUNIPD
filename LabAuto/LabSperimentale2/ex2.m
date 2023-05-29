@@ -97,12 +97,11 @@ intervals_al = [
     [15.12  15.93];
     [16.17  16.93];
     [17.13  17.91];
-    [17.15  17.94];
     [18.24   18.9];
     [ 19.2  19.87]
 ];
 
-intervals_al = intervals_al / Ts + 1;
+intervals_al = int64(intervals_al / Ts + 1);
 
 al_avg = zeros(20, 1);
 for i = 1:20
@@ -131,12 +130,11 @@ intervals_taui = [
     [15.12  15.93];
     [16.17  16.93];
     [17.13  17.91];
-    [17.15  17.94];
     [18.24   18.9];
     [ 19.2  19.87]
 ];
 
-intervals_taui = intervals_taui / Ts + 1;
+intervals_taui = int64(intervals_taui / Ts + 1);
 
 taui_avg = zeros(20, 1);
 for i = 1:20
