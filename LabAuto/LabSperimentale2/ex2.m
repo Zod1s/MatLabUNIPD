@@ -31,28 +31,30 @@ Hdia = c2d(Hcia, Ts, 'tustin');
 
 %% Obtaining acceleration from speed measurement and current
 wl = triang_resp.signals(4).values * rpm2rads;
+% wl = w_triang.data * rpm2rads;
 al = filter(numHdal, denHdal, wl);
 ia = filter(numHdia, denHdia, triang_resp.signals(6).values);
+% ia = filter(numHdia, denHdia, ia_triang.data);
 
 %% Evaluating intervals
 figure(1)
 hold on
 grid on
-plot(triang_resp.time, wl)
+plot(w_triang.time, wl)
 ylabel("$w_{l}$ [rad/s]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 figure(2)
 hold on
 grid on
-plot(triang_resp.time, al)
+plot(w_triang.time, al)
 ylabel("$a_{l}$ [rad/$s^2$]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 figure(3)
 hold on
 grid on
-plot(triang_resp.time, ia)
+plot(w_triang.time, ia)
 ylabel("$i_{a}$ [A]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
@@ -65,7 +67,7 @@ taui = taum - tauf;
 figure(4)
 hold on
 grid on
-plot(triang_resp.time, al)
+plot(w_triang.time, al)
 ylabel("$a_{l}$ [rad/$s^2$]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
@@ -73,30 +75,30 @@ xlabel("$t$ [s]", "Interpreter", "latex")
 figure(5)
 hold on
 grid on
-plot(triang_resp.time, taui)
+plot(w_triang.time, taui)
 ylabel("$\tau_{i}$ [Nm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 %% Average acceleration
 intervals_al = [
-    [ 0.17   0.97];
-    [  1.1    1.9];
-    [ 2.17   2.95];
-    [  3.1    3.9];
-    [ 4.16   4.95];
-    [ 5.16   5.95];
-    [ 6.15   6.94];
-    [ 7.15   7.93];
-    [ 8.17   8.92];
-    [ 9.17   9.95];
-    [10.14  10.94];
-    [11.12  11.95];
-    [12.13  12.92];
-    [13.14  13.91];
-    [14.14  14.96];
-    [15.12  15.93];
-    [16.17  16.93];
-    [17.13  17.91];
+    [ 0.23   0.95];
+    [  1.2    1.8];
+    [ 2.22   2.90];
+    [  3.2    3.9];
+    [ 4.22   4.90];
+    [ 5.22   5.90];
+    [ 6.22   6.90];
+    [ 7.22   7.90];
+    [ 8.22   8.90];
+    [ 9.22   9.90];
+    [10.22  10.90];
+    [11.22  11.90];
+    [12.22  12.90];
+    [13.22  13.90];
+    [14.22  14.90];
+    [15.22  15.90];
+    [16.22  16.90];
+    [17.22  17.90];
     [18.24   18.9];
     [ 19.2  19.87]
 ];
@@ -112,24 +114,24 @@ am_avg = al_avg * gbox.N;
 
 %% Average torque
 intervals_taui = [
-    [ 0.17   0.97];
-    [  1.1    1.9];
-    [ 2.17   2.95];
-    [  3.1    3.9];
-    [ 4.16   4.95];
-    [ 5.16   5.95];
-    [ 6.15   6.94];
-    [ 7.15   7.93];
-    [ 8.17   8.92];
-    [ 9.17   9.95];
-    [10.14  10.94];
-    [11.12  11.95];
-    [12.13  12.92];
-    [13.14  13.91];
-    [14.14  14.96];
-    [15.12  15.93];
-    [16.17  16.93];
-    [17.13  17.91];
+    [ 0.23   0.95];
+    [  1.2    1.8];
+    [ 2.22   2.90];
+    [  3.2    3.9];
+    [ 4.22   4.90];
+    [ 5.22   5.90];
+    [ 6.22   6.90];
+    [ 7.22   7.90];
+    [ 8.22   8.90];
+    [ 9.22   9.90];
+    [10.22  10.90];
+    [11.22  11.90];
+    [12.22  12.90];
+    [13.22  13.90];
+    [14.22  14.90];
+    [15.22  15.90];
+    [16.22  16.90];
+    [17.22  17.90];
     [18.24   18.9];
     [ 19.2  19.87]
 ];

@@ -5,7 +5,9 @@ close all
 
 %% Parameters
 load('params.mat')
-load('responses.mat')
+% load('responses.mat')
+load('stair_resp_neg_sim.mat')
+load('stair_resp_pos_sim.mat')
 
 %% Plotting results
 figure(1)
@@ -88,10 +90,10 @@ intervals_wl_pos = [
     [40.5   45]
 ];
 
-intervals_wl_pos = int64(intervals_wl_pos / Ts + 1);
+intervals_wl_pos = int64(10 * intervals_wl_pos / Ts + 1);
 
-wl_pos = stair_resp_pos.signals(4).values; % [rpm]
-% wl_pos = w_pos.data;
+% wl_pos = stair_resp_pos.signals(4).values; % [rpm]
+wl_pos = w_pos.data;
 
 wl_avg_pos = zeros(9, 1);
 for i = 1:9
@@ -103,8 +105,8 @@ tau_pos = sign(wm_pos) / gbox.N;
 phi_pos = [wm_pos, tau_pos];
 
 %% Calculating positive current
-ia_pos = filter(numHd, denHd, stair_resp_pos.signals(6).values);
-% ia_pos_data = filter(numHd, denHd, ia_pos.data);
+% ia_pos = filter(numHd, denHd, stair_resp_pos.signals(6).values);
+ia_pos_data = filter(numHd, denHd, ia_pos.data);
 
 intervals_ia_pos = [
     [ 0.5  4.6];
@@ -118,11 +120,11 @@ intervals_ia_pos = [
     [40.5   45]
 ];
 
-intervals_ia_pos = int64(intervals_ia_pos / Ts + 1);
+intervals_ia_pos = int64(10 * intervals_ia_pos / Ts + 1);
 
 ia_avg_pos = zeros(9, 1);
 for i = 1:9
-    ia_avg_pos(i) = mean(ia_pos(intervals_ia_pos(i, 1):intervals_ia_pos(i, 2)));
+    ia_avg_pos(i) = mean(ia_pos_data(intervals_ia_pos(i, 1):intervals_ia_pos(i, 2)));
 end
 
 taum_pos = mot.Kt * ia_avg_pos; % [Nm]
@@ -145,10 +147,10 @@ intervals_wl_neg = [
     [40.5   45]
 ];
 
-intervals_wl_neg = int64(intervals_wl_neg / Ts + 1);
+intervals_wl_neg = int64(10 * intervals_wl_neg / Ts + 1);
 
-wl_neg = stair_resp_neg.signals(4).values;
-% wl_neg = w_neg.data;
+% wl_neg = stair_resp_neg.signals(4).values;
+wl_neg = w_neg.data;
 
 wl_avg_neg = zeros(9, 1);
 for i = 1:9
@@ -160,8 +162,8 @@ tau_neg = sign(wm_neg) / gbox.N;
 phi_neg = [wm_neg, tau_neg];
 
 %% Calculating positive current
-ia_neg = filter(numHd, denHd, stair_resp_neg.signals(6).values);
-% ia_neg_data = filter(numHd, denHd, ia_neg.data);
+% ia_neg = filter(numHd, denHd, stair_resp_neg.signals(6).values);
+ia_neg_data = filter(numHd, denHd, ia_neg.data);
 
 intervals_ia_neg = [
     [ 0.5  4.6];
@@ -175,11 +177,11 @@ intervals_ia_neg = [
     [40.5   45]
 ];
 
-intervals_ia_neg = int64(intervals_ia_neg / Ts + 1);
+intervals_ia_neg = int64(10 * intervals_ia_neg / Ts + 1);
 
 ia_avg_neg = zeros(9, 1);
 for i = 1:9
-    ia_avg_neg(i) = mean(ia_neg(intervals_ia_neg(i, 1):intervals_ia_neg(i, 2)));
+    ia_avg_neg(i) = mean(ia_neg_data(intervals_ia_neg(i, 1):intervals_ia_neg(i, 2)));
 end
 
 taum_neg = mot.Kt * ia_avg_neg;

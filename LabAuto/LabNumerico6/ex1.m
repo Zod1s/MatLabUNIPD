@@ -81,7 +81,7 @@ stair.simtime = string(stair.time);
 %% Triangular wave
 % Only one cicle is needed
 triang.A = 450; %[rpm/s]
-triang.dt = 2; %[s] Half length of a cycle
+triang.dt = 1; %[s] Half length of a cycle
 % Where the zeros and the peak are in the cycle
 triang.times = (0:2) * triang.dt;
 triang.values = [0 1 0]; % Normalized values assumed by the function
@@ -93,8 +93,8 @@ open_system("motor.slx")
 %% Simulate
 input = 3;
 
-set_param("motor", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", stair.simtime);
+set_param("motor", "SolverType", "Fixed-step", "Solver", "ode3", ...
+    "StopTime", triang.simtime);
 
 sim("motor");
 
