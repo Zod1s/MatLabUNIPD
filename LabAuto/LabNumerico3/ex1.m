@@ -16,9 +16,9 @@ Ie = I + m * l^2;
 Me = M + m;
 
 %% Initial conditions
-x0 = 1;
-dx0 = 0.1;
-th0 = pi * 7 / 8;
+x0 = 0;
+dx0 = 0;
+th0 = pi / 8;
 dth0 = 0;
 
 %% Opening the model
@@ -35,28 +35,28 @@ figure(1)
 subplot(2, 2, 1)
 hold on
 grid on
-yline(x0, '--')
+yline(x0)
 plot(x.time, x.data)
-legend("x0", "x")
+legend("X")
 
 subplot(2, 2, 3)
 hold on
 grid on
-yline(dx0, '--')
+yline(dx0)
 plot(dx.time, dx.data)
-legend("dx0", "dx")
+legend("DX")
 
 subplot(2, 2, 2)
 hold on
 grid on
-yline(th0, '--')
-yline(pi, '--')
+yline(th0)
+yline(pi)
 plot(th.time, th.data)
-legend("theta0", "\pi", "theta")
+legend("Theta")
 
 subplot(2, 2, 4)
 hold on
 grid on
 yline(dth0)
 plot(dth.time, dth.data)
-legend("dtheta0", "dtheta")
+legend("DTheta")

@@ -111,12 +111,12 @@ x0u = [xu0; dxu0; thu0; dthu0];
 
 %% Simulating the simulink model
 set_param("nl_cart_2", "SolverType", "Variable-step", "Solver", "ode45", ...
-    "MaxStep", "0.0001", "StopTime", "0.1");
+    "MaxStep", "0.0001", "StopTime", "5");
 
 sim("nl_cart_2");
 
 %% Simulating the linearized model
-[xthu, t] = initial(upward, x0u, 0.1);
+[xthu, t] = initial(upward, x0u, 5);
 xu = xthu(:, 1);
 thu = xthu(:, 2);
 
@@ -125,7 +125,7 @@ figure(2)
 subplot(1, 2, 1)
 hold on
 grid on
-yline(xu0, '--')
+yline(xu0)
 plot(x.time, x.data)
 plot(t, xu)
 legend("initial", "x", "xu")
@@ -133,20 +133,19 @@ legend("initial", "x", "xu")
 subplot(1, 2, 2)
 hold on
 grid on
-yline(thu0, '--')
-yline(pi, '--')
+yline(thu0)
+yline(pi)
 plot(th.time, th.data)
 plot(t, thu)
-legend("initial", "\pi", "theta", "thetau")
+legend("initial", "pi", "theta", "thetau")
 
 %% Comparing natural responses with the downward model
 xd0 = 0;
 dxd0 = 0;
-thd0 = 7 * pi / 8;
+thd0 = pi / 8;
 dthd0 = 0;
-x0d = [xd0; dxd0; thd0 - pi; dthd0];
-% For the linearized model, we consider variation with respect to the
-% equilibrim point xeq = [0, 0, pi, 0]^T
+x0d = [xd0; dxd0; thd0; dthd0];
+% x0u = [xu0, dxu0, thu0, dthu0];
 
 %% Simulating the simulink model
 set_param("nl_cart_2", "SolverType", "Variable-step", "Solver", "ode45", ...
@@ -164,7 +163,7 @@ figure(3)
 subplot(1, 2, 1)
 hold on
 grid on
-yline(xd0, '--')
+yline(xd0)
 plot(x.time, x.data)
 plot(t, xd)
 legend("initial", "x", "xd")
@@ -172,11 +171,10 @@ legend("initial", "x", "xd")
 subplot(1, 2, 2)
 hold on
 grid on
-yline(thd0, '--')
-yline(pi, '--')
-plot(th.time, th.data)
-plot(t, thd + pi)
-legend("initial", "\pi", "theta", "thetad")
+yline(thd0)
+plot(th.time, th.data - pi)
+plot(t, thd)
+legend("initial", "theta", "thetad")
 
 %% Spring
 k = 10;

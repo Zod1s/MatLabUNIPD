@@ -23,8 +23,8 @@ diff.Ts = 0.001;
 diff.type = 2;
 pid.Kp = 0.0298;
 pid.Ki = 6.5015;
-awu.Tw = 0.03;
-awu.en = 0;
+awu.Tw = 0.145 / 3;
+awu.en = 1;
 ff.en = 1;
 
 %% Input function
@@ -42,7 +42,7 @@ set_param("motor2", "SolverType", "Variable-step", "Solver", "ode45", ...
 sim("motor2");
 
 %% Plotting results
-figure(4)
+figure(5)
 subplot(2, 3, 1)
 hold on
 grid on
