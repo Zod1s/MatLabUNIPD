@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor2".
  *
- * Model version              : 2.157
+ * Model version              : 2.160
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon May 29 14:37:26 2023
+ * C source code generated on : Mon Jun  5 13:08:42 2023
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -68,9 +68,9 @@ P_motor2_T motor2_P = {
     1.0,
     0.17980342454697359,
     48.221704164501993,
-    0.005548003507534283,
-    0.0097,
-    0.000217266
+    0.0054269303815862174,
+    0.0096,
+    0.0002179912
   },
 
   /* Variable: diff

@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor2".
  *
- * Model version              : 2.157
+ * Model version              : 2.160
  * Simulink Coder version : 9.8 (R2022b) 13-May-2022
- * C source code generated on : Mon May 29 14:37:26 2023
+ * C source code generated on : Mon Jun  5 13:08:42 2023
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -713,10 +713,10 @@ RT_MODEL_motor2_T *motor2(void)
   motor2_M->Timing.stepSize2 = 0.5;
 
   /* External mode info */
-  motor2_M->Sizes.checksums[0] = (1403779099U);
-  motor2_M->Sizes.checksums[1] = (505328843U);
-  motor2_M->Sizes.checksums[2] = (1543816924U);
-  motor2_M->Sizes.checksums[3] = (3765017758U);
+  motor2_M->Sizes.checksums[0] = (2549103961U);
+  motor2_M->Sizes.checksums[1] = (1721775889U);
+  motor2_M->Sizes.checksums[2] = (3599978054U);
+  motor2_M->Sizes.checksums[3] = (1058043534U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;

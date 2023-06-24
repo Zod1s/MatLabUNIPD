@@ -6,12 +6,12 @@ close all
 %% Parameters
 load('params.mat')
 s = tf('s');
-Beq = 1.1085e-6; %[Nm / (rad/s)]
+Beq = 1.1122e-6; %[Nm / (rad/s)]
 Req = sens.curr.Rs + mot.R; %[ohm]
-Jeq = 5.7428e-7; %[kg m^2]
+Jeq = 5.7419e-7; %[kg m^2]
 
 %% Motor parameters
-tausf = 9.7e-3; %[Nm]
+tausf = 9.6e-3; %[Nm]
 dac.Ts = 0.001; %[s]
 dac.q = 20 / (2^16 - 1); %[V]
 dac.V = 10; %[V]
@@ -45,22 +45,22 @@ figure(4)
 subplot(2, 3, 1)
 hold on
 grid on
-plot(step_awu.time, step_awu.signals(3).values)
+plot(step_no_awu.time, step_no_awu.signals(3).values)
 ylabel("$u_{ideal}$ [V]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 3, 2)
 hold on
 grid on
-plot(step_awu.time, step_awu.signals(4).values)
+plot(step_no_awu.time, step_no_awu.signals(4).values)
 ylabel("$u_{real}$ [V]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 3, 3)
 hold on
 grid on
-plot(step_awu.time, step_awu.signals(5).values, "--")
-plot(step_awu.time, step_awu.signals(1).values)
+plot(step_no_awu.time, step_no_awu.signals(5).values, "--")
+plot(step_no_awu.time, step_no_awu.signals(1).values)
 ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
 legend("measured", "reference")
 xlabel("$t$ [s]", "Interpreter", "latex")
@@ -68,14 +68,14 @@ xlabel("$t$ [s]", "Interpreter", "latex")
 subplot(2, 3, 4)
 hold on
 grid on
-plot(step_awu.time, step_awu.signals(2).values)
+plot(step_no_awu.time, step_no_awu.signals(2).values)
 ylabel("$e$ [rpm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 3, 5)
 hold on
 grid on
-plot(step_awu.time, step_awu.signals(7).values)
+plot(step_no_awu.time, step_no_awu.signals(7).values)
 ylabel("$i_{a}$ [A]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 

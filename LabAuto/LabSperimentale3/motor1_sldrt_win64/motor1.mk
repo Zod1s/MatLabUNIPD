@@ -164,7 +164,7 @@ REQ_INCLUDES := $(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/extern/include;$(
 REQ_INCLUDES += ;$(MATLAB_ROOT)/toolbox/shared/can/src/scanutil;$(SLDRTDIR)/src
 
 # additional includes
-REQ_INCLUDES += ;C:/Users/saporitife/Documents/MATLAB/LabSperimentale3;C:/Users/saporitife/Documents/MATLAB/LabSperimentale3/motor1_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
+REQ_INCLUDES += ;Z:/windows_profile/Documenti/MATLAB/temp/LabAuto/LabSperimentale3;Z:/windows_profile/Documenti/MATLAB/temp/LabAuto/LabSperimentale3/motor1_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
 
 INCLUDES := $(USER_INCLUDES);.;$(RELATIVE_PATH_TO_ANCHOR);$(REQ_INCLUDES)
 
