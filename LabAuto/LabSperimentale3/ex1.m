@@ -46,72 +46,52 @@ subplot(2, 3, 1)
 xlim([0 3])
 ylim([0 16])
 hold on
-% grid minor
 plot(step_no_awu.time, step_no_awu.signals(3).values, "r")
 plot(step_no_awu.time, step_no_awu.signals(4).values, "b")
-legend("ideal", "real")
+legend("richiesta", "fornita")
 ylabel("$u$ [V]", "Interpreter", "latex")
 
 subplot(2, 3, 4)
 xlim([0 3])
 ylim([0 16])
 hold on
-% grid minor
 plot(step_awu.time, step_awu.signals(3).values, "r")
 plot(step_awu.time, step_awu.signals(4).values, "b")
-legend("ideal", "real")
+legend("richiesta", "fornita")
 ylabel("$u$ [V]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
-
-% subplot(2, 3, 2)
-% hold on
-% grid on
-% plot(step_no_awu.time, step_no_awu.signals(4).values)
-% ylabel("$u_{real}$ [V]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 3, 2)
 xlim([0 3])
 ylim([0 500])
 hold on
-% grid minor
 plot(step_no_awu.time, step_no_awu.signals(5).values, "r")
 plot(step_no_awu.time, step_no_awu.signals(1).values, "b--")
 ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
-legend("measured", "reference")
+legend("misurata", "riferimento")
 
 subplot(2, 3, 5)
 xlim([0 3])
 ylim([0 500])
 hold on
-% grid minor
 plot(step_awu.time, step_awu.signals(5).values, "r")
 plot(step_awu.time, step_awu.signals(1).values, "b--")
 ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
-legend("measured", "reference")
+legend("misurata", "riferimento")
 
 subplot(2, 3, 3)
 xlim([0 3])
 hold on
-% grid minor
 plot(step_no_awu.time, step_no_awu.signals(2).values, "b")
 ylabel("$e$ [rpm]", "Interpreter", "latex")
 
 subplot(2, 3, 6)
 xlim([0 3])
 hold on
-% grid minor
 plot(step_awu.time, step_awu.signals(2).values, "b")
 ylabel("$e$ [rpm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
-
-% subplot(2, 3, 5)
-% hold on
-% grid on
-% plot(step_no_awu.time, step_no_awu.signals(7).values)
-% ylabel("$i_{a}$ [A]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
 
 %% DATA Layout
 % 1 -> wl_star

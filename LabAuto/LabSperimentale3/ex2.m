@@ -46,56 +46,6 @@ set_param("motor2", "SolverType", "Variable-step", "Solver", "ode45", ...
 
 sim("motor2");
 
-% %% Plotting results
-% figure(5)
-% subplot(2, 3, 1)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(4).values)
-% ylabel("$u_{ideal}$ [V]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-% 
-% subplot(2, 3, 2)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(5).values)
-% ylabel("$u_{real}$ [V]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-% 
-% subplot(2, 3, 3)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(6).values, "--")
-% plot(awu_ff_resp.time, awu_ff_resp.signals(1).values)
-% ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
-% legend("measured", "reference")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-% 
-% subplot(2, 3, 4)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(3).values)
-% ylabel("$e$ [rpm]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-% 
-% subplot(2, 3, 5)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(8).values)
-% ylabel("$i_{a}$ [A]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-% 
-% subplot(2, 3, 6)
-% hold on
-% grid on
-% plot(awu_ff_resp.time, awu_ff_resp.signals(2).values)
-% ylabel("$a_{l}$ [rpm / s]", "Interpreter", "latex")
-% xlabel("$t$ [s]", "Interpreter", "latex")
-
-% Overshoot specification is not satisfied due to the fact that it was
-% designed based on a semplification of the real dinamics, so it is an
-% approximation of its behaviour.
-
 %% DATA Layout
 % 1 -> wl_star
 % 2 -> al_sstar
@@ -113,7 +63,7 @@ ylim([-15 15])
 hold on
 % grid minor
 plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(5).values, "b")
-ylabel("$u_{real}$ [V]", "Interpreter", "latex")
+ylabel("$u$ [V]", "Interpreter", "latex")
 
 subplot(2, 3, 4)
 xlim([0 3])
@@ -121,7 +71,7 @@ ylim([-15 15])
 hold on
 % grid minor
 plot(awu_ff_resp.time, awu_ff_resp.signals(5).values, "b")
-ylabel("$u_{real}$ [V]", "Interpreter", "latex")
+ylabel("$u$ [V]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
 
 subplot(2, 3, 2)
@@ -132,7 +82,7 @@ hold on
 plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(6).values, "r")
 plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(1).values, "b--")
 ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
-legend("measured", "reference")
+legend("misurata", "riferimento")
 
 subplot(2, 3, 5)
 xlim([0 3])
@@ -143,7 +93,7 @@ plot(awu_ff_resp.time, awu_ff_resp.signals(6).values, "r")
 plot(awu_ff_resp.time, awu_ff_resp.signals(1).values, "b--")
 ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
 xlabel("$t$ [s]", "Interpreter", "latex")
-legend("measured", "reference")
+legend("misurata", "riferimento")
 
 subplot(2, 3, 3)
 xlim([0 3])
@@ -154,6 +104,64 @@ plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(3).values, "b")
 ylabel("$e$ [rpm]", "Interpreter", "latex")
 
 subplot(2, 3, 6)
+xlim([0 3])
+ylim([-60 60])
+hold on
+% grid minor
+plot(awu_ff_resp.time, awu_ff_resp.signals(3).values, "b")
+ylabel("$e$ [rpm]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
+
+%% 
+figure(1)
+subplot(1, 3, 1)
+xlim([0 3])
+ylim([-15 15])
+hold on
+% grid minor
+plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(5).values, "b")
+ylabel("$u_{real}$ [V]", "Interpreter", "latex")
+
+subplot(1, 3, 2)
+xlim([0 3])
+ylim([-500 500])
+hold on
+% grid minor
+plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(6).values, "r")
+plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(1).values, "b--")
+ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
+legend("misurata", "riferimento")
+
+subplot(1, 3, 3)
+xlim([0 3])
+ylim([-60 60])
+hold on
+% grid minor
+plot(awu_no_ff_resp.time, awu_no_ff_resp.signals(3).values, "b")
+ylabel("$e$ [rpm]", "Interpreter", "latex")
+
+figure(2)
+subplot(1, 3, 1)
+xlim([0 3])
+ylim([-15 15])
+hold on
+% grid minor
+plot(awu_ff_resp.time, awu_ff_resp.signals(5).values, "b")
+ylabel("$u_{real}$ [V]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
+
+subplot(1, 3, 2)
+xlim([0 3])
+ylim([-500 500])
+hold on
+% grid minor
+plot(awu_ff_resp.time, awu_ff_resp.signals(6).values, "r")
+plot(awu_ff_resp.time, awu_ff_resp.signals(1).values, "b--")
+ylabel("$\omega_{l}$ [rpm]", "Interpreter", "latex")
+xlabel("$t$ [s]", "Interpreter", "latex")
+legend("misurata", "riferimento")
+
+subplot(1, 3, 3)
 xlim([0 3])
 ylim([-60 60])
 hold on
